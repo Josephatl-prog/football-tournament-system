@@ -1,11 +1,15 @@
 from src.tournament import Tournament
-from src.team import Team
 from src.player import Player
 from src.match import Match
-from src.group import Group
+
+from src.services.data_loader import (
+    load_teams,
+    get_team_by_name
+)
 
 
 def main():
+
     # Create Tournament
     tournament = Tournament(
         name="Final Year Inter-Departmental Tournament",
@@ -14,29 +18,29 @@ def main():
         teams_per_group=4
     )
 
-    # Create Teams
-    aerospace = Team(
-        name="Aerospace Engineering",
-        captain="Joseph",
-        manager="Joseph"
+    # Load Teams
+    teams = load_teams(tournament)
+
+    # Get Teams
+    aerospace = get_team_by_name(
+        teams,
+        "Aerospace Engineering"
     )
 
-    mechanical = Team(
-        name="Mechanical Engineering",
-        captain="David",
-        manager="Musa"
+    mechanical = get_team_by_name(
+        teams,
+        "Mechanical Engineering"
     )
-
-    # Register Teams
-    tournament.add_team(aerospace)
-    tournament.add_team(mechanical)
 
     # Create Group A
-    group_a = Group("A")
+    tournament.create_group("A")
 
-    # Assign Teams To Group A
-    group_a.add_team(aerospace)
-    group_a.add_team(mechanical)
+    # Assign Teams to Group A
+    tournament.assign_team_to_group("AER", "A")
+    tournament.assign_team_to_group("MEC", "A")
+
+    # Get Group A
+    group_a = tournament.get_group("A")
 
     # Create Players
     joseph = Player(
@@ -51,7 +55,7 @@ def main():
         position="Striker"
     )
 
-    # Add Players to Aerospace
+    # Add Players
     aerospace.add_player(joseph)
     aerospace.add_player(david)
 
@@ -72,6 +76,9 @@ def main():
     # Display Teams
     tournament.display_teams()
 
+    # Display Groups
+    tournament.display_groups()
+
     # Display Players
     aerospace.display_players()
 
@@ -88,13 +95,11 @@ def main():
 
     # Display Team Statistics
     print("\n----- TEAM STATISTICS -----")
-
     aerospace.display_statistics()
     mechanical.display_statistics()
 
     # Display Group Table
     print("\n----- GROUP TABLE -----")
-
     group_a.display_table()
 
 

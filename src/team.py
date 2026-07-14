@@ -3,10 +3,14 @@ class Team:
     Represents a football team.
     """
 
-    def __init__(self, name, captain, manager):
+    def __init__(self, team_id, name, captain, manager):
+        self.team_id = team_id
         self.name = name
         self.captain = captain
         self.manager = manager
+
+        # Group Assignment
+        self.group = None
 
         # List to store players
         self.players = []
@@ -35,6 +39,10 @@ class Team:
         """
         print(f"\nPlayers for {self.name}:")
 
+        if not self.players:
+            print("No players registered.")
+            return
+
         for player in self.players:
             print(player)
 
@@ -43,6 +51,8 @@ class Team:
         Displays the team's tournament statistics.
         """
         print(f"\nStatistics for {self.name}")
+        print(f"Team ID: {self.team_id}")
+        print(f"Group: {self.group}")
         print(f"Played: {self.played}")
         print(f"Won: {self.won}")
         print(f"Drawn: {self.drawn}")
