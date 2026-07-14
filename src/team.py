@@ -9,10 +9,10 @@ class Team:
         self.captain = captain
         self.manager = manager
 
-        # Group Assignment
+        # Tournament Group
         self.group = None
 
-        # List to store players
+        # Squad
         self.players = []
 
         # Team Statistics
@@ -31,6 +31,7 @@ class Team:
         """
         Adds a player to the team.
         """
+        player.team = self.name
         self.players.append(player)
 
     def display_players(self):
@@ -53,6 +54,8 @@ class Team:
         print(f"\nStatistics for {self.name}")
         print(f"Team ID: {self.team_id}")
         print(f"Group: {self.group}")
+        print(f"Captain: {self.captain}")
+        print(f"Manager: {self.manager}")
         print(f"Played: {self.played}")
         print(f"Won: {self.won}")
         print(f"Drawn: {self.drawn}")

@@ -21,7 +21,7 @@ def main():
     # Load Teams
     teams = load_teams(tournament)
 
-    # Get Teams
+    # Retrieve Teams
     aerospace = get_team_by_name(
         teams,
         "Aerospace Engineering"
@@ -55,7 +55,7 @@ def main():
         position="Striker"
     )
 
-    # Add Players
+    # Add Players to Aerospace
     aerospace.add_player(joseph)
     aerospace.add_player(david)
 
@@ -73,32 +73,49 @@ def main():
     # Display Tournament Information
     tournament.display_info()
 
-    # Display Teams
+    # Display Registered Teams
     tournament.display_teams()
 
-    # Display Groups
+    # Display Tournament Groups
     tournament.display_groups()
 
     # Display Players
     aerospace.display_players()
 
-    # Display Match Before Result
+    # Match Before Result
     print("\n----- MATCH BEFORE RESULT -----")
     match1.display_match()
 
     # Record Match Result
     match1.record_result(2, 1)
 
-    # Display Match After Result
+    # Record Goals
+    match1.add_goal(
+        scorer=joseph,
+        assist=david,
+        minute=18
+    )
+
+    match1.add_goal(
+        scorer=david,
+        minute=74
+    )
+
+    # Match After Result
     print("\n----- MATCH AFTER RESULT -----")
     match1.display_match()
 
-    # Display Team Statistics
+    # Team Statistics
     print("\n----- TEAM STATISTICS -----")
     aerospace.display_statistics()
     mechanical.display_statistics()
 
-    # Display Group Table
+    # Player Statistics
+    print("\n----- PLAYER STATISTICS -----")
+    joseph.display_statistics()
+    david.display_statistics()
+
+    # Group Table
     print("\n----- GROUP TABLE -----")
     group_a.display_table()
 

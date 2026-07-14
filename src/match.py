@@ -57,11 +57,13 @@ class Match:
 
         # Update goal difference
         self.home_team.goal_difference = (
-            self.home_team.goals_for - self.home_team.goals_against
+            self.home_team.goals_for -
+            self.home_team.goals_against
         )
 
         self.away_team.goal_difference = (
-            self.away_team.goals_for - self.away_team.goals_against
+            self.away_team.goals_for -
+            self.away_team.goals_against
         )
 
         # Determine winner
@@ -87,6 +89,25 @@ class Match:
             self.home_team.points += 1
             self.away_team.points += 1
 
+    def add_goal(self, scorer, minute, assist=None):
+        """
+        Records a goal scored during the match.
+        """
+
+        goal = {
+            "scorer": scorer,
+            "assist": assist,
+            "minute": minute
+        }
+
+        self.goals.append(goal)
+
+        # Update player statistics
+        scorer.goals += 1
+
+        if assist is not None:
+            assist.assists += 1
+
     def display_match(self):
         """
         Displays match information.
@@ -100,6 +121,21 @@ class Match:
         print(f"Group: {self.group}")
         print(f"Status: {self.status}")
         print(f"Score: {self.home_score} - {self.away_score}")
+
+        if self.goals:
+
+            print("\nGoals:")
+
+            for goal in self.goals:
+
+                scorer = goal["scorer"].name
+                minute = goal["minute"]
+                assist = goal["assist"]
+
+                print(f"{minute}' ⚽ {scorer}")
+
+                if assist is not None:
+                    print(f"    Assist: {assist.name}")
 
     def __str__(self):
         return f"{self.home_team} vs {self.away_team}"
