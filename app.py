@@ -7,6 +7,8 @@ from src.services.data_loader import (
     get_team_by_name
 )
 
+from src.services.fixture_manager import FixtureManager
+
 
 def main():
 
@@ -20,6 +22,12 @@ def main():
         number_of_groups=4,
         teams_per_group=4
     )
+
+    # ==========================================
+    # Fixture Manager
+    # ==========================================
+
+    fixture_manager = FixtureManager(tournament)
 
     # ==========================================
     # Load Teams
@@ -47,7 +55,7 @@ def main():
     tournament.create_group("D")
 
     # ==========================================
-    # Assign Teams to Groups
+    # Assign Teams
     # ==========================================
 
     # Group A
@@ -74,7 +82,10 @@ def main():
     tournament.assign_team_to_group("IRS", "D")
     tournament.assign_team_to_group("BAE", "D")
 
+    # ==========================================
     # Get Group A
+    # ==========================================
+
     group_a = tournament.get_group("A")
 
     # ==========================================
@@ -108,10 +119,11 @@ def main():
     aerospace.add_player(ahmed)
 
     # ==========================================
-    # Create Match
+    # Create Fixture
     # ==========================================
 
     match1 = Match(
+        fixture_id="FIX001",
         home_team=aerospace,
         away_team=mechanical,
         match_date="12 July 2026",
@@ -122,10 +134,20 @@ def main():
     )
 
     # ==========================================
-    # Add Match to Tournament
+    # Register Fixture
     # ==========================================
 
-    tournament.add_match(match1)
+    fixture_manager.add_fixture(match1)
+
+    # ==========================================
+    # Edit Fixture
+    # ==========================================
+
+    fixture_manager.edit_fixture(
+        fixture_id="FIX001",
+        kickoff_time="5:00 PM",
+        venue="AFIT Stadium"
+    )
 
     # ==========================================
     # Tournament Information
@@ -137,7 +159,7 @@ def main():
 
     tournament.display_groups()
 
-    tournament.display_matches()
+    fixture_manager.display_fixtures()
 
     aerospace.display_players()
 
@@ -150,7 +172,7 @@ def main():
     match1.display_match()
 
     # ==========================================
-    # Record Match Result
+    # Record Result
     # ==========================================
 
     match1.record_result(2, 1)
@@ -159,39 +181,33 @@ def main():
     # Match Events
     # ==========================================
 
-    # Goal
     match1.add_goal(
         scorer=joseph,
         assist=david,
         minute=18
     )
 
-    # Yellow Card
     match1.add_yellow_card(
         player=joseph,
         minute=41
     )
 
-    # Substitution
     match1.add_substitution(
         player_out=joseph,
         player_in=ahmed,
         minute=67
     )
 
-    # Goal
     match1.add_goal(
         scorer=david,
         minute=74
     )
 
-    # Red Card
     match1.add_red_card(
         player=david,
         minute=88
     )
 
-    # Player of the Match
     match1.set_player_of_the_match(
         joseph
     )

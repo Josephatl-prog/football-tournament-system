@@ -5,6 +5,7 @@ class Match:
 
     def __init__(
         self,
+        fixture_id,
         home_team,
         away_team,
         match_date,
@@ -13,6 +14,8 @@ class Match:
         stage,
         group=None
     ):
+        self.fixture_id = fixture_id
+
         self.home_team = home_team
         self.away_team = away_team
 
@@ -26,7 +29,7 @@ class Match:
         self.home_score = 0
         self.away_score = 0
 
-        self.status = "Not Played"
+        self.status = "Scheduled"
 
         self.goals = []
         self.yellow_cards = []
@@ -35,6 +38,30 @@ class Match:
 
         self.player_of_the_match = None
 
+    def start_match(self):
+        """
+        Starts the match.
+        """
+        self.status = "Live"
+
+    def complete_match(self):
+        """
+        Marks the match as completed.
+        """
+        self.status = "Completed"
+
+    def postpone_match(self):
+        """
+        Postpones the match.
+        """
+        self.status = "Postponed"
+
+    def cancel_match(self):
+        """
+        Cancels the match.
+        """
+        self.status = "Cancelled"
+
     def record_result(self, home_score, away_score):
         """
         Records the final score and updates team statistics.
@@ -42,17 +69,20 @@ class Match:
 
         self.home_score = home_score
         self.away_score = away_score
-        self.status = "Played"
+        self.status = "Completed"
 
+        # Update matches played
         self.home_team.played += 1
         self.away_team.played += 1
 
+        # Update goals
         self.home_team.goals_for += home_score
         self.home_team.goals_against += away_score
 
         self.away_team.goals_for += away_score
         self.away_team.goals_against += home_score
 
+        # Update goal difference
         self.home_team.goal_difference = (
             self.home_team.goals_for -
             self.home_team.goals_against
@@ -63,6 +93,7 @@ class Match:
             self.away_team.goals_against
         )
 
+        # Determine winner
         if home_score > away_score:
 
             self.home_team.won += 1
@@ -149,6 +180,7 @@ class Match:
 
     def display_match(self):
 
+        print(f"\nFixture ID : {self.fixture_id}")
         print(f"\n{self.home_team} vs {self.away_team}")
         print(f"Date: {self.match_date}")
         print(f"Kickoff: {self.kickoff_time}")
@@ -165,14 +197,13 @@ class Match:
             for goal in self.goals:
 
                 print(
-                    f"{goal['minute']}' ⚽ "
-                    f"{goal['scorer'].name}"
+                    f"{goal['minute']}' ⚽ {goal['scorer'].name}"
                 )
 
                 if goal["assist"]:
+
                     print(
-                        f"    Assist: "
-                        f"{goal['assist'].name}"
+                        f"    🎯 Assist: {goal['assist'].name}"
                     )
 
         if self.yellow_cards:
@@ -182,8 +213,7 @@ class Match:
             for card in self.yellow_cards:
 
                 print(
-                    f"{card['minute']}' 🟨 "
-                    f"{card['player'].name}"
+                    f"{card['minute']}' 🟨 {card['player'].name}"
                 )
 
         if self.red_cards:
@@ -193,8 +223,7 @@ class Match:
             for card in self.red_cards:
 
                 print(
-                    f"{card['minute']}' 🟥 "
-                    f"{card['player'].name}"
+                    f"{card['minute']}' 🟥 {card['player'].name}"
                 )
 
         if self.substitutions:
@@ -204,8 +233,7 @@ class Match:
             for sub in self.substitutions:
 
                 print(
-                    f"{sub['minute']}' 🔄 "
-                    f"{sub['player_out'].name} OFF"
+                    f"{sub['minute']}' 🔄 {sub['player_out'].name} OFF"
                 )
 
                 print(
@@ -214,9 +242,12 @@ class Match:
 
         if self.player_of_the_match:
 
-            print("\n⭐ Player of the Match:")
+            print("\n⭐ Player of the Match")
 
             print(self.player_of_the_match.name)
 
     def __str__(self):
-        return f"{self.home_team} vs {self.away_team}"
+        return (
+            f"{self.fixture_id} | "
+            f"{self.home_team} vs {self.away_team}"
+        )
