@@ -44,18 +44,15 @@ class Match:
         self.away_score = away_score
         self.status = "Played"
 
-        # Update matches played
         self.home_team.played += 1
         self.away_team.played += 1
 
-        # Update goals
         self.home_team.goals_for += home_score
         self.home_team.goals_against += away_score
 
         self.away_team.goals_for += away_score
         self.away_team.goals_against += home_score
 
-        # Update goal difference
         self.home_team.goal_difference = (
             self.home_team.goals_for -
             self.home_team.goals_against
@@ -66,7 +63,6 @@ class Match:
             self.away_team.goals_against
         )
 
-        # Determine winner
         if home_score > away_score:
 
             self.home_team.won += 1
@@ -91,7 +87,7 @@ class Match:
 
     def add_goal(self, scorer, minute, assist=None):
         """
-        Records a goal scored during the match.
+        Records a goal.
         """
 
         goal = {
@@ -102,16 +98,56 @@ class Match:
 
         self.goals.append(goal)
 
-        # Update player statistics
         scorer.goals += 1
 
-        if assist is not None:
+        if assist:
             assist.assists += 1
 
+    def add_yellow_card(self, player, minute):
+        """
+        Records a yellow card.
+        """
+
+        self.yellow_cards.append({
+            "player": player,
+            "minute": minute
+        })
+
+        player.yellow_cards += 1
+
+    def add_red_card(self, player, minute):
+        """
+        Records a red card.
+        """
+
+        self.red_cards.append({
+            "player": player,
+            "minute": minute
+        })
+
+        player.red_cards += 1
+
+    def add_substitution(self, player_out, player_in, minute):
+        """
+        Records a substitution.
+        """
+
+        self.substitutions.append({
+            "player_out": player_out,
+            "player_in": player_in,
+            "minute": minute
+        })
+
+    def set_player_of_the_match(self, player):
+        """
+        Sets the Player of the Match.
+        """
+
+        self.player_of_the_match = player
+
+        player.player_of_the_match_awards += 1
+
     def display_match(self):
-        """
-        Displays match information.
-        """
 
         print(f"\n{self.home_team} vs {self.away_team}")
         print(f"Date: {self.match_date}")
@@ -128,14 +164,59 @@ class Match:
 
             for goal in self.goals:
 
-                scorer = goal["scorer"].name
-                minute = goal["minute"]
-                assist = goal["assist"]
+                print(
+                    f"{goal['minute']}' ⚽ "
+                    f"{goal['scorer'].name}"
+                )
 
-                print(f"{minute}' ⚽ {scorer}")
+                if goal["assist"]:
+                    print(
+                        f"    Assist: "
+                        f"{goal['assist'].name}"
+                    )
 
-                if assist is not None:
-                    print(f"    Assist: {assist.name}")
+        if self.yellow_cards:
+
+            print("\nYellow Cards:")
+
+            for card in self.yellow_cards:
+
+                print(
+                    f"{card['minute']}' 🟨 "
+                    f"{card['player'].name}"
+                )
+
+        if self.red_cards:
+
+            print("\nRed Cards:")
+
+            for card in self.red_cards:
+
+                print(
+                    f"{card['minute']}' 🟥 "
+                    f"{card['player'].name}"
+                )
+
+        if self.substitutions:
+
+            print("\nSubstitutions:")
+
+            for sub in self.substitutions:
+
+                print(
+                    f"{sub['minute']}' 🔄 "
+                    f"{sub['player_out'].name} OFF"
+                )
+
+                print(
+                    f"    {sub['player_in'].name} ON"
+                )
+
+        if self.player_of_the_match:
+
+            print("\n⭐ Player of the Match:")
+
+            print(self.player_of_the_match.name)
 
     def __str__(self):
         return f"{self.home_team} vs {self.away_team}"
