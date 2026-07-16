@@ -14,6 +14,7 @@ class Match:
         stage,
         group=None
     ):
+
         self.fixture_id = fixture_id
 
         self.home_team = home_team
@@ -39,27 +40,15 @@ class Match:
         self.player_of_the_match = None
 
     def start_match(self):
-        """
-        Starts the match.
-        """
         self.status = "Live"
 
     def complete_match(self):
-        """
-        Marks the match as completed.
-        """
         self.status = "Completed"
 
     def postpone_match(self):
-        """
-        Postpones the match.
-        """
         self.status = "Postponed"
 
     def cancel_match(self):
-        """
-        Cancels the match.
-        """
         self.status = "Cancelled"
 
     def record_result(self, home_score, away_score):
@@ -69,20 +58,21 @@ class Match:
 
         self.home_score = home_score
         self.away_score = away_score
+
         self.status = "Completed"
 
-        # Update matches played
+        # Matches Played
         self.home_team.played += 1
         self.away_team.played += 1
 
-        # Update goals
+        # Goals
         self.home_team.goals_for += home_score
         self.home_team.goals_against += away_score
 
         self.away_team.goals_for += away_score
         self.away_team.goals_against += home_score
 
-        # Update goal difference
+        # Goal Difference
         self.home_team.goal_difference = (
             self.home_team.goals_for -
             self.home_team.goals_against
@@ -93,7 +83,7 @@ class Match:
             self.away_team.goals_against
         )
 
-        # Determine winner
+        # Result
         if home_score > away_score:
 
             self.home_team.won += 1
@@ -101,12 +91,18 @@ class Match:
 
             self.away_team.lost += 1
 
+            self.home_team.update_form("W")
+            self.away_team.update_form("L")
+
         elif away_score > home_score:
 
             self.away_team.won += 1
             self.away_team.points += 3
 
             self.home_team.lost += 1
+
+            self.away_team.update_form("W")
+            self.home_team.update_form("L")
 
         else:
 
@@ -116,10 +112,10 @@ class Match:
             self.home_team.points += 1
             self.away_team.points += 1
 
+            self.home_team.update_form("D")
+            self.away_team.update_form("D")
+
     def add_goal(self, scorer, minute, assist=None):
-        """
-        Records a goal.
-        """
 
         goal = {
             "scorer": scorer,
@@ -135,9 +131,6 @@ class Match:
             assist.assists += 1
 
     def add_yellow_card(self, player, minute):
-        """
-        Records a yellow card.
-        """
 
         self.yellow_cards.append({
             "player": player,
@@ -147,9 +140,6 @@ class Match:
         player.yellow_cards += 1
 
     def add_red_card(self, player, minute):
-        """
-        Records a red card.
-        """
 
         self.red_cards.append({
             "player": player,
@@ -159,9 +149,6 @@ class Match:
         player.red_cards += 1
 
     def add_substitution(self, player_out, player_in, minute):
-        """
-        Records a substitution.
-        """
 
         self.substitutions.append({
             "player_out": player_out,
@@ -170,9 +157,6 @@ class Match:
         })
 
     def set_player_of_the_match(self, player):
-        """
-        Sets the Player of the Match.
-        """
 
         self.player_of_the_match = player
 
@@ -181,13 +165,17 @@ class Match:
     def display_match(self):
 
         print(f"\nFixture ID : {self.fixture_id}")
+
         print(f"\n{self.home_team} vs {self.away_team}")
+
         print(f"Date: {self.match_date}")
         print(f"Kickoff: {self.kickoff_time}")
         print(f"Venue: {self.venue}")
         print(f"Stage: {self.stage}")
         print(f"Group: {self.group}")
+
         print(f"Status: {self.status}")
+
         print(f"Score: {self.home_score} - {self.away_score}")
 
         if self.goals:
@@ -247,6 +235,7 @@ class Match:
             print(self.player_of_the_match.name)
 
     def __str__(self):
+
         return (
             f"{self.fixture_id} | "
             f"{self.home_team} vs {self.away_team}"

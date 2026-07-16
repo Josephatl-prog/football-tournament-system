@@ -8,6 +8,8 @@ from src.services.data_loader import (
 )
 
 from src.services.fixture_manager import FixtureManager
+from src.services.qualification_manager import QualificationManager
+from src.services.knockout_manager import KnockoutManager
 
 
 def main():
@@ -35,6 +37,8 @@ def main():
 
     teams = load_teams(tournament)
 
+    qualification_manager = QualificationManager(tournament)
+
     aerospace = get_team_by_name(
         teams,
         "Aerospace Engineering"
@@ -44,6 +48,8 @@ def main():
         teams,
         "Mechanical Engineering"
     )
+
+    knockout_manager = KnockoutManager(tournament)
 
     # ==========================================
     # Create Groups
@@ -246,6 +252,71 @@ def main():
     print("\n----- GROUP TABLE -----")
 
     group_a.display_table()
+
+    # ==========================================
+    # Qualified Teams
+    # ==========================================
+
+    qualification_manager.display_qualified_teams()
+
+    print("\n----- KNOCKOUT STAGE -----")
+
+    knockout_manager.create_quarter_final(
+        fixture_id="QF001",
+        home_team=aerospace,
+        away_team=mechanical,
+        match_date="20 July 2026",
+        kickoff_time="4:00 PM",
+        venue="AFIT Stadium"
+    )
+
+    knockout_manager.display_quarter_finals()
+
+    # ==========================================
+    # Demo Quarter Final Result
+    # ==========================================
+
+    qf = knockout_manager.quarter_finals[0]
+
+    qf.record_result(3, 2)
+
+    print("\n----- QUARTER FINAL RESULT -----")
+
+    qf.display_match()
+
+    knockout_manager.display_quarter_final_winners()
+
+    # ==========================================
+    # Generate Semi Finals
+    # ==========================================
+
+    knockout_manager.generate_semi_finals(
+        match_date="24 July 2026",
+        kickoff_time="4:00 PM",
+        venue="AFIT Stadium"
+    )
+
+    knockout_manager.display_semi_finals()
+
+    # ==========================================
+    # Final & Third Place Demo
+    # ==========================================
+
+    knockout_manager.generate_final(
+        match_date="28 July 2026",
+        kickoff_time="4:00 PM",
+        venue="AFIT Stadium"
+    )
+
+    knockout_manager.generate_third_place_match(
+        match_date="28 July 2026",
+        kickoff_time="12:00 PM",
+        venue="AFIT Stadium"
+    )
+
+    knockout_manager.display_final()
+
+    knockout_manager.display_third_place_match()
 
 
 if __name__ == "__main__":
