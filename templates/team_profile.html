@@ -1,0 +1,212 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="team-profile-page">
+
+    <div class="container">
+
+        <!-- TEAM HEADER -->
+
+        <div class="team-header">
+
+            <div class="team-logo-large">
+
+                <i class="bi bi-shield-fill"></i>
+
+            </div>
+
+            <div>
+
+                <h1>{{ department_name }}</h1>
+
+                <p>AFIT Football Championship 2026</p>
+
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <!-- LEFT COLUMN -->
+
+            <div class="col-lg-4">
+
+                <!-- Team Info -->
+
+                <div class="profile-card">
+
+                    <h4>Team Information</h4>
+
+                    <hr>
+
+                    <p><strong>Captain:</strong> TBA</p>
+
+                    <p><strong>Vice Captain:</strong> TBA</p>
+
+                    <p><strong>Manager:</strong> TBA</p>
+
+                    <p><strong>Coach:</strong> TBA</p>
+
+                    <p><strong>Group:</strong> A</p>
+
+                    <p><strong>Current Position:</strong> 1st</p>
+
+                </div>
+
+                <!-- Recent Form -->
+
+                <div class="profile-card">
+
+                    <h4>Recent Form</h4>
+
+                    <hr>
+
+                    <div class="team-form">
+
+                        🟢 🟢 🟡 🔴 🟢
+
+                    </div>
+
+                </div>
+
+                <!-- Next Match -->
+
+                <div class="profile-card">
+
+                    <h4>Next Match</h4>
+
+                    <hr>
+
+                    <h5>{{ department_name }}</h5>
+
+                    <h4 class="text-center my-3">VS</h4>
+
+                    <h5>Mechanical Engineering</h5>
+
+                    <br>
+
+                    <p><strong>Venue:</strong> AFIT Sports Complex</p>
+
+                    <p><strong>Date:</strong> 9 October 2026</p>
+
+                    <p><strong>Kickoff:</strong> 4:00 PM</p>
+
+                </div>
+
+            </div>
+
+            <!-- RIGHT COLUMN -->
+
+            <div class="col-lg-8">
+
+                <!-- Statistics -->
+
+                <div class="profile-card">
+
+                    <h4>Tournament Statistics</h4>
+
+                    <hr>
+
+                    <div class="stats-grid">
+
+                        <div><h3>0</h3><small>Played</small></div>
+                        <div><h3>0</h3><small>Won</small></div>
+                        <div><h3>0</h3><small>Drawn</small></div>
+                        <div><h3>0</h3><small>Lost</small></div>
+                        <div><h3>0</h3><small>GF</small></div>
+                        <div><h3>0</h3><small>GA</small></div>
+                        <div><h3>0</h3><small>GD</small></div>
+                        <div><h3>0</h3><small>Points</small></div>
+
+                    </div>
+
+                </div>
+
+                <!-- Squad -->
+
+                <div class="profile-card">
+
+                    <h4>Squad List</h4>
+
+                    <hr>
+
+                    <table class="table table-hover">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>#</th>
+
+                                <th>Player</th>
+
+                                <th>Position</th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                        {% if players %}
+
+                            {% for player in players %}
+
+                            <tr>
+
+                                <td>{{ player.jersey_number }}</td>
+
+                                <td>
+
+                                    <a href="#">
+
+                                        {{ player.name }}
+
+                                    </a>
+
+                                </td>
+
+                                <td>{{ player.position }}</td>
+
+                            </tr>
+
+                            {% endfor %}
+
+                        {% else %}
+
+                        <tr>
+
+                            <td colspan="3" class="text-center py-5">
+
+                                <i class="bi bi-people fs-1 text-secondary"></i>
+
+                                <br><br>
+
+                                <strong>No registered players yet.</strong>
+
+                                <br>
+
+                                The tournament administrator will register players here.
+
+                            </td>
+
+                        </tr>
+
+                        {% endif %}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

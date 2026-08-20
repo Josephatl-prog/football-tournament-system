@@ -1,0 +1,811 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="lineup-page">
+
+    <div class="container">
+
+        <!-- ========================================= -->
+        <!-- HEADER -->
+        <!-- ========================================= -->
+
+        <div class="section-heading">
+
+            <span>Starting Lineups</span>
+
+            <h2>
+                {{ fixture.home_team.name }}
+                <span class="mx-2">vs</span>
+                {{ fixture.away_team.name }}
+            </h2>
+
+            <p>
+                {{ fixture.match_date }}
+                |
+                {{ fixture.kickoff_time }}
+                |
+                {{ fixture.venue }}
+            </p>
+
+        </div>
+
+
+        <!-- ========================================= -->
+        <!-- LINEUP NOT PUBLISHED -->
+        <!-- ========================================= -->
+
+        {% if not lineup_published %}
+
+        <div class="text-center py-5">
+
+            <div class="card shadow-sm p-5">
+
+                <div style="font-size: 55px;">
+                    ⚽
+                </div>
+
+                <h2 class="mt-3">
+                    Lineup Not Updated Yet
+                </h2>
+
+                <p class="text-muted">
+                    The starting lineups for this fixture have not
+                    been published by the tournament administrator yet.
+                </p>
+
+                <a href="{{ url_for('fixtures') }}" class="btn btn-success mt-3">
+                    Back to Fixtures
+                </a>
+
+            </div>
+
+        </div>
+
+        {% else %}
+
+
+        <!-- ========================================= -->
+        <!-- HOME TEAM -->
+        <!-- ========================================= -->
+
+        <div class="lineup-team">
+
+            <h3 class="text-center mb-4">
+                {{ fixture.home_team.name }}
+            </h3>
+
+
+            <div class="football-pitch">
+
+                <div class="halfway-line"></div>
+
+                <div class="pitch-circle"></div>
+
+
+                <!-- HOME GK -->
+
+                {% for lineup in home_lineup %}
+                {% if lineup.position == "GK" %}
+
+                <div class="player-slot goalkeeper">
+
+                    <span class="position-label">
+                        GK
+                    </span>
+
+                    <div class="selected-player">
+
+                        <strong>
+                            #{{ lineup.player.jersey_number }}
+                        </strong>
+
+                        <span>
+                            {{ lineup.player.full_name }}
+                        </span>
+
+                    </div>
+
+                </div>
+
+                {% endif %}
+                {% endfor %}
+
+
+                <!-- HOME LB -->
+
+                {% for lineup in home_lineup %}
+                {% if lineup.position == "LB" %}
+
+                <div class="player-slot defender-left">
+
+                    <span class="position-label">
+                        LB
+                    </span>
+
+                    <div class="selected-player">
+
+                        <strong>
+                            #{{ lineup.player.jersey_number }}
+                        </strong>
+
+                        <span>
+                            {{ lineup.player.full_name }}
+                        </span>
+
+                    </div>
+
+                </div>
+
+                {% endif %}
+                {% endfor %}
+
+
+                <!-- HOME CB1 -->
+
+                {% for lineup in home_lineup %}
+                {% if lineup.position == "CB" %}
+
+                {% if loop.index == 1 %}
+
+                <div class="player-slot defender-center-left">
+
+                    <span class="position-label">
+                        CB
+                    </span>
+
+                    <div class="selected-player">
+
+                        <strong>
+                            #{{ lineup.player.jersey_number }}
+                        </strong>
+
+                        <span>
+                            {{ lineup.player.full_name }}
+                        </span>
+
+                    </div>
+
+                </div>
+
+                {% endif %}
+                {% endif %}
+                {% endfor %}
+
+
+                <!-- HOME CB2 -->
+
+                {% for lineup in home_lineup %}
+                {% if lineup.position == "CB" %}
+
+                {% if loop.index == 2 %}
+
+                <div class="player-slot defender-center-right">
+
+                    <span class="position-label">
+                        CB
+                    </span>
+
+                    <div class="selected-player">
+
+                        <strong>
+                            #{{ lineup.player.jersey_number }}
+                        </strong>
+
+                        <span>
+                            {{ lineup.player.full_name }}
+                        </span>
+
+                    </div>
+
+                </div>
+
+                {% endif %}
+                {% endif %}
+                {% endfor %}
+
+
+                <!-- HOME RB -->
+
+                {% for lineup in home_lineup %}
+                {% if lineup.position == "RB" %}
+
+                <div class="player-slot defender-right">
+
+                    <span class="position-label">
+                        RB
+                    </span>
+
+                    <div class="selected-player">
+
+                        <strong>
+                            #{{ lineup.player.jersey_number }}
+                        </strong>
+
+                        <span>
+                            {{ lineup.player.full_name }}
+                        </span>
+
+                    </div>
+
+                </div>
+
+                {% endif %}
+                {% endfor %}
+
+
+                <!-- HOME MIDFIELD -->
+
+                {% set midfielders = home_lineup
+                | selectattr("position", "equalto", "CM")
+                | list
+                %}
+
+
+                {% if midfielders|length > 0 %}
+
+                <div class="player-slot midfielder-left">
+
+                    <span class="position-label">
+                        CM
+                    </span>
+
+                    <div class="selected-player">
+
+                        <strong>
+                            #{{ midfielders[0].player.jersey_number }}
+                        </strong>
+
+                        <span>
+                            {{ midfielders[0].player.full_name }}
+                        </span>
+
+                    </div>
+
+                </div>
+
+                {% endif %}
+
+
+                {% if midfielders|length > 1 %}
+
+                <div class="player-slot midfielder-center">
+
+                    <span class="position-label">
+                        CM
+                    </span>
+
+                    <div class="selected-player">
+
+                        <strong>
+                            #{{ midfielders[1].player.jersey_number }}
+                        </strong>
+
+                        <span>
+                            {{ midfielders[1].player.full_name }}
+                        </span>
+
+                    </div>
+
+                </div>
+
+                {% endif %}
+
+
+                {% if midfielders|length > 2 %}
+
+                <div class="player-slot midfielder-right">
+
+                    <span class="position-label">
+                        CM
+                    </span>
+
+                    <div class="selected-player">
+
+                        <strong>
+                            #{{ midfielders[2].player.jersey_number }}
+                        </strong>
+
+                        <span>
+                            {{ midfielders[2].player.full_name }}
+                        </span>
+
+                    </div>
+
+                </div>
+
+                {% endif %}
+
+
+                <!-- HOME ATTACK -->
+
+                {% for lineup in home_lineup %}
+                {% if lineup.position == "LW" %}
+
+                <div class="player-slot attacker-left">
+
+                    <span class="position-label">
+                        LW
+                    </span>
+
+                    <div class="selected-player">
+
+                        <strong>
+                            #{{ lineup.player.jersey_number }}
+                        </strong>
+
+                        <span>
+                            {{ lineup.player.full_name }}
+                        </span>
+
+                    </div>
+
+                </div>
+
+                {% endif %}
+                {% endfor %}
+
+
+                {% for lineup in home_lineup %}
+                {% if lineup.position == "ST" %}
+
+                <div class="player-slot attacker-center">
+
+                    <span class="position-label">
+                        ST
+                    </span>
+
+                    <div class="selected-player">
+
+                        <strong>
+                            #{{ lineup.player.jersey_number }}
+                        </strong>
+
+                        <span>
+                            {{ lineup.player.full_name }}
+                        </span>
+
+                    </div>
+
+                </div>
+
+                {% endif %}
+                {% endfor %}
+
+
+                {% for lineup in home_lineup %}
+                {% if lineup.position == "RW" %}
+
+                <div class="player-slot attacker-right">
+
+                    <span class="position-label">
+                        RW
+                    </span>
+
+                    <div class="selected-player">
+
+                        <strong>
+                            #{{ lineup.player.jersey_number }}
+                        </strong>
+
+                        <span>
+                            {{ lineup.player.full_name }}
+                        </span>
+
+                    </div>
+
+                </div>
+
+                {% endif %}
+                {% endfor %}
+
+            </div>
+
+
+            <!-- HOME SUBSTITUTES -->
+
+            <div class="substitutes-card mt-4">
+
+                <h3>
+                    {{ fixture.home_team.name }} Substitutes
+                </h3>
+
+                <div class="substitute-grid">
+
+                    {% for lineup in home_substitutes %}
+
+                    <div class="substitute-player">
+
+                        <span>
+                            #{{ lineup.player.jersey_number }}
+                            {{ lineup.player.full_name }}
+                        </span>
+
+                    </div>
+
+                    {% else %}
+
+                    <p class="text-muted">
+                        No substitutes listed.
+                    </p>
+
+                    {% endfor %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ========================================= -->
+        <!-- AWAY TEAM -->
+        <!-- ========================================= -->
+
+        <div class="lineup-team away-lineup mt-5">
+
+            <h3 class="text-center mb-4">
+                {{ fixture.away_team.name }}
+            </h3>
+
+
+            <div class="football-pitch">
+
+                <div class="halfway-line"></div>
+
+                <div class="pitch-circle"></div>
+
+
+                <!-- AWAY GK -->
+
+                {% for lineup in away_lineup %}
+                {% if lineup.position == "GK" %}
+
+                <div class="player-slot goalkeeper">
+
+                    <span class="position-label">
+                        GK
+                    </span>
+
+                    <div class="selected-player">
+
+                        <strong>
+                            #{{ lineup.player.jersey_number }}
+                        </strong>
+
+                        <span>
+                            {{ lineup.player.full_name }}
+                        </span>
+
+                    </div>
+
+                </div>
+
+                {% endif %}
+                {% endfor %}
+
+
+                <!-- AWAY DEFENCE -->
+
+                {% for lineup in away_lineup %}
+
+                {% if lineup.position == "LB" %}
+
+                <div class="player-slot defender-left">
+
+                    <span class="position-label">
+                        LB
+                    </span>
+
+                    <div class="selected-player">
+
+                        <strong>
+                            #{{ lineup.player.jersey_number }}
+                        </strong>
+
+                        <span>
+                            {{ lineup.player.full_name }}
+                        </span>
+
+                    </div>
+
+                </div>
+
+                {% endif %}
+
+                {% endfor %}
+
+
+                {% set away_cbs = away_lineup
+                | selectattr("position", "equalto", "CB")
+                | list
+                %}
+
+
+                {% if away_cbs|length > 0 %}
+
+                <div class="player-slot defender-center-left">
+
+                    <span class="position-label">
+                        CB
+                    </span>
+
+                    <div class="selected-player">
+
+                        <strong>
+                            #{{ away_cbs[0].player.jersey_number }}
+                        </strong>
+
+                        <span>
+                            {{ away_cbs[0].player.full_name }}
+                        </span>
+
+                    </div>
+
+                </div>
+
+                {% endif %}
+
+
+                {% if away_cbs|length > 1 %}
+
+                <div class="player-slot defender-center-right">
+
+                    <span class="position-label">
+                        CB
+                    </span>
+
+                    <div class="selected-player">
+
+                        <strong>
+                            #{{ away_cbs[1].player.jersey_number }}
+                        </strong>
+
+                        <span>
+                            {{ away_cbs[1].player.full_name }}
+                        </span>
+
+                    </div>
+
+                </div>
+
+                {% endif %}
+
+
+                {% for lineup in away_lineup %}
+
+                {% if lineup.position == "RB" %}
+
+                <div class="player-slot defender-right">
+
+                    <span class="position-label">
+                        RB
+                    </span>
+
+                    <div class="selected-player">
+
+                        <strong>
+                            #{{ lineup.player.jersey_number }}
+                        </strong>
+
+                        <span>
+                            {{ lineup.player.full_name }}
+                        </span>
+
+                    </div>
+
+                </div>
+
+                {% endif %}
+
+                {% endfor %}
+
+
+                <!-- AWAY MIDFIELD -->
+
+                {% set away_midfielders = away_lineup
+                | selectattr("position", "equalto", "CM")
+                | list
+                %}
+
+
+                {% if away_midfielders|length > 0 %}
+
+                <div class="player-slot midfielder-left">
+
+                    <span class="position-label">
+                        CM
+                    </span>
+
+                    <div class="selected-player">
+
+                        <strong>
+                            #{{ away_midfielders[0].player.jersey_number }}
+                        </strong>
+
+                        <span>
+                            {{ away_midfielders[0].player.full_name }}
+                        </span>
+
+                    </div>
+
+                </div>
+
+                {% endif %}
+
+
+                {% if away_midfielders|length > 1 %}
+
+                <div class="player-slot midfielder-center">
+
+                    <span class="position-label">
+                        CM
+                    </span>
+
+                    <div class="selected-player">
+
+                        <strong>
+                            #{{ away_midfielders[1].player.jersey_number }}
+                        </strong>
+
+                        <span>
+                            {{ away_midfielders[1].player.full_name }}
+                        </span>
+
+                    </div>
+
+                </div>
+
+                {% endif %}
+
+
+                {% if away_midfielders|length > 2 %}
+
+                <div class="player-slot midfielder-right">
+
+                    <span class="position-label">
+                        CM
+                    </span>
+
+                    <div class="selected-player">
+
+                        <strong>
+                            #{{ away_midfielders[2].player.jersey_number }}
+                        </strong>
+
+                        <span>
+                            {{ away_midfielders[2].player.full_name }}
+                        </span>
+
+                    </div>
+
+                </div>
+
+                {% endif %}
+
+
+                <!-- AWAY ATTACK -->
+
+                {% for lineup in away_lineup %}
+
+                {% if lineup.position == "LW" %}
+
+                <div class="player-slot attacker-left">
+
+                    <span class="position-label">
+                        LW
+                    </span>
+
+                    <div class="selected-player">
+
+                        <strong>
+                            #{{ lineup.player.jersey_number }}
+                        </strong>
+
+                        <span>
+                            {{ lineup.player.full_name }}
+                        </span>
+
+                    </div>
+
+                </div>
+
+                {% endif %}
+
+
+                {% if lineup.position == "ST" %}
+
+                <div class="player-slot attacker-center">
+
+                    <span class="position-label">
+                        ST
+                    </span>
+
+                    <div class="selected-player">
+
+                        <strong>
+                            #{{ lineup.player.jersey_number }}
+                        </strong>
+
+                        <span>
+                            {{ lineup.player.full_name }}
+                        </span>
+
+                    </div>
+
+                </div>
+
+                {% endif %}
+
+
+                {% if lineup.position == "RW" %}
+
+                <div class="player-slot attacker-right">
+
+                    <span class="position-label">
+                        RW
+                    </span>
+
+                    <div class="selected-player">
+
+                        <strong>
+                            #{{ lineup.player.jersey_number }}
+                        </strong>
+
+                        <span>
+                            {{ lineup.player.full_name }}
+                        </span>
+
+                    </div>
+
+                </div>
+
+                {% endif %}
+
+                {% endfor %}
+
+            </div>
+
+
+            <!-- AWAY SUBSTITUTES -->
+
+            <div class="substitutes-card mt-4">
+
+                <h3>
+                    {{ fixture.away_team.name }} Substitutes
+                </h3>
+
+                <div class="substitute-grid">
+
+                    {% for lineup in away_substitutes %}
+
+                    <div class="substitute-player">
+
+                        <span>
+                            #{{ lineup.player.jersey_number }}
+                            {{ lineup.player.full_name }}
+                        </span>
+
+                    </div>
+
+                    {% else %}
+
+                    <p class="text-muted">
+                        No substitutes listed.
+                    </p>
+
+                    {% endfor %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+{% endblock %}

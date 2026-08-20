@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="fixtures-page">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <span>Schedule</span>
+
+            <h2>Upcoming Fixtures</h2>
+
+            <p>
+                Follow every upcoming match throughout the
+                AFIT Football Championship.
+            </p>
+
+        </div>
+
+
+        {% if fixtures %}
+
+        {% for fixture in fixtures %}
+
+        <div class="fixture-card">
+
+            <div>
+
+                <h5>
+
+                    {{ fixture.home_team.name }}
+
+                    <span class="mx-3">VS</span>
+
+                    {{ fixture.away_team.name }}
+
+                </h5>
+
+
+                <p>
+
+                    📅 {{ fixture.match_date }}
+
+                    |
+
+                    🕓 {{ fixture.kickoff_time }}
+
+                    |
+
+                    📍 {{ fixture.venue }}
+
+                </p>
+
+            </div>
+
+
+            <a href="{{ url_for(
+                            'view_lineup',
+                            fixture_id=fixture.id
+                        ) }}" class="btn btn-success">
+
+                View Lineup
+
+            </a>
+
+        </div>
+
+        {% endfor %}
+
+
+        {% else %}
+
+        <div class="text-center py-5">
+
+            <h4>No upcoming fixtures.</h4>
+
+            <p class="text-muted">
+
+                New fixtures will appear here once they
+                are added by the tournament administrators.
+
+            </p>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+{% endblock %}

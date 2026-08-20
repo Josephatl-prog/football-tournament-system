@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="admin-page">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <span>Admin Control</span>
+
+            <h2>Manage Lineups</h2>
+
+            <p>
+                Select and publish starting lineups for upcoming fixtures.
+            </p>
+
+        </div>
+
+
+        {% if fixtures %}
+
+        <div class="admin-fixtures-list">
+
+            {% for fixture in fixtures %}
+
+            <div class="fixture-card">
+
+                <div>
+
+                    <span class="text-muted">
+                        {{ fixture.stage }}
+                    </span>
+
+                    <h4 class="mt-2">
+
+                        {{ fixture.home_team.name }}
+
+                        <span class="mx-3">VS</span>
+
+                        {{ fixture.away_team.name }}
+
+                    </h4>
+
+                    <p>
+
+                        📅 {{ fixture.match_date }}
+
+                        |
+
+                        🕓 {{ fixture.kickoff_time }}
+
+                        |
+
+                        📍 {{ fixture.venue }}
+
+                    </p>
+
+                    {% if fixture.lineup_published %}
+
+                    <span class="badge bg-success">
+                        Lineup Published
+                    </span>
+
+                    {% else %}
+
+                    <span class="badge bg-warning text-dark">
+                        Lineup Not Published
+                    </span>
+
+                    {% endif %}
+
+                </div>
+
+
+                <div>
+
+                    <a href="{{ url_for(
+                                'manage_lineup',
+                                fixture_id=fixture.id
+                            ) }}" class="btn btn-success">
+
+                        {% if fixture.lineup_published %}
+
+                        Edit Lineup
+
+                        {% else %}
+
+                        Manage Lineup
+
+                        {% endif %}
+
+                    </a>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        {% else %}
+
+        <div class="text-center py-5">
+
+            <h3>No Upcoming Fixtures</h3>
+
+            <p class="text-muted">
+
+                There are currently no upcoming fixtures
+                available for lineup selection.
+
+            </p>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+{% endblock %}

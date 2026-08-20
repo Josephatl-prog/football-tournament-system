@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <h2 class="fw-bold mb-4">
+
+        Edit Team
+
+    </h2>
+
+    <div class="card shadow-sm">
+
+        <div class="card-body">
+
+            <form method="POST">
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+
+                        Department Name
+
+                    </label>
+
+                    <input type="text" class="form-control" name="name" value="{{ team.name }}" required>
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+
+                        Captain
+
+                    </label>
+
+                    <input type="text" class="form-control" name="captain" value="{{ team.captain }}">
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+
+                        Manager
+
+                    </label>
+
+                    <input type="text" class="form-control" name="manager" value="{{ team.manager }}">
+
+                </div>
+
+                <div class="mb-4">
+
+                    <label class="form-label">
+
+                        Players
+
+                    </label>
+
+                    <input type="number" class="form-control" name="players" value="{{ team.players }}">
+
+                </div>
+
+                <button class="btn btn-success">
+
+                    Save Changes
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

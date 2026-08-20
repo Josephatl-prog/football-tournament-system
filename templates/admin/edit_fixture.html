@@ -1,0 +1,190 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container" style="margin-top:170px;">
+
+    <div class="mb-3">
+
+        <a href="{{ url_for('admin_dashboard') }}" class="btn btn-outline-secondary">
+
+            ← Dashboard
+
+        </a>
+
+    </div>
+
+    <h2 class="fw-bold mb-4">
+        Edit Fixture
+    </h2>
+
+    <div class="card shadow-sm">
+
+        <div class="card-body">
+
+            <form method="POST">
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+
+                        Home Team
+
+                    </label>
+
+                    <select class="form-select" name="home_team_id">
+                    
+                        {% for team in teams %}
+                    
+                        <option value="{{ team.id }}" {% if fixture.home_team_id==team.id %}selected{% endif %}>
+                    
+                            {{ team.name }}
+                    
+                        </option>
+                    
+                        {% endfor %}
+                    
+                    </select>
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+
+                        Away Team
+
+                    </label>
+
+                    <select class="form-select" name="away_team_id">
+                    
+                        {% for team in teams %}
+                    
+                        <option value="{{ team.id }}" {% if fixture.away_team_id==team.id %}selected{% endif %}>
+                    
+                            {{ team.name }}
+                    
+                        </option>
+                    
+                        {% endfor %}
+                    
+                    </select>
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+
+                        Match Date
+
+                    </label>
+
+                    <input type="date" class="form-control" name="match_date" value="{{ fixture.match_date }}">
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+
+                        Kickoff Time
+
+                    </label>
+
+                    <input type="time" class="form-control" name="kickoff_time" value="{{ fixture.kickoff_time }}">
+                </div>
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+
+                        Venue
+
+                    </label>
+
+                    <input type="text" class="form-control" name="venue" value="{{ fixture.venue }}">
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+
+                        Stage
+
+                    </label>
+
+                    <select class="form-select" name="stage">
+
+                        <option value="Group Stage" {% if fixture.stage=="Group Stage" %}selected{% endif %}>
+                        
+                            Group Stage
+                        
+                        </option>
+
+                        <option value="Quarter Final" {% if fixture.stage=="Quarter Final" %}selected{% endif %}>
+                        
+                            Quarter Final
+                        
+                        </option>
+
+                        <option value="Semi Final" {% if fixture.stage=="Semi Final" %}selected{% endif %}>
+                        
+                            Semi Final
+                        
+                        </option>
+
+                        <option value="Third Place" {% if fixture.stage=="Third Place" %}selected{% endif %}>
+                        
+                            Third Place
+                        
+                        </option>
+
+                        <option value="Final" {% if fixture.stage=="Final" %}selected{% endif %}>
+                        
+                            Final
+                        
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <div class="mb-4">
+
+                    <label class="form-label">
+
+                        Group
+
+                    </label>
+
+                    <select class="form-select" name="group">
+
+                        <option value="A" {% if fixture.group=="A" %}selected{% endif %}>A</option>
+
+                        <option value="B" {% if fixture.group=="B" %}selected{% endif %}>B</option>
+
+                        <option value="C" {% if fixture.group=="C" %}selected{% endif %}>C</option>
+
+                        <option value="D" {% if fixture.group=="D" %}selected{% endif %}>D</option>
+
+                    </select>
+
+                </div>
+
+                <button class="btn btn-success">
+
+                    Update Fixture
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="fixtures-page">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <span>Team Lineups</span>
+
+            <h2>Lineup Not Updated Yet</h2>
+
+            <p>
+                The starting lineups for this fixture have not
+                been published by the tournament administrator.
+            </p>
+
+        </div>
+
+        <div class="fixture-card text-center">
+
+            <h4>
+                {{ fixture.home_team.name }}
+                <span class="mx-3">VS</span>
+                {{ fixture.away_team.name }}
+            </h4>
+
+            <p>
+                📅 {{ fixture.match_date }}
+                |
+                🕓 {{ fixture.kickoff_time }}
+                |
+                📍 {{ fixture.venue }}
+            </p>
+
+            <div class="mt-4">
+
+                <span class="badge bg-secondary">
+                    Lineup Not Published
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

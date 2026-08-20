@@ -1,0 +1,1071 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container" style="margin-top:170px;">
+
+    <!-- Back -->
+
+    <div class="mb-3">
+
+        <a href="{{ url_for('admin_dashboard') }}" class="btn btn-outline-secondary">
+
+            ← Dashboard
+
+        </a>
+
+    </div>
+
+
+    <!-- HEADER -->
+
+    <div class="mb-4">
+
+        <h2 class="fw-bold">
+            Tournament Statistics
+        </h2>
+
+        <p class="text-muted">
+            AFIT Football Championship 2026
+        </p>
+
+    </div>
+
+
+    <!-- ==========================================
+         SUMMARY CARDS
+    =========================================== -->
+
+    <div class="row g-4 mb-5">
+
+
+        <!-- Teams -->
+
+        <div class="col-md-3">
+
+            <div class="card shadow-sm border-0 h-100">
+
+                <div class="card-body text-center">
+
+                    <h6 class="text-muted">
+                        Teams
+                    </h6>
+
+                    <h2 class="fw-bold text-primary">
+                        {{ total_teams }}
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Matches -->
+
+        <div class="col-md-3">
+
+            <div class="card shadow-sm border-0 h-100">
+
+                <div class="card-body text-center">
+
+                    <h6 class="text-muted">
+                        Matches Played
+                    </h6>
+
+                    <h2 class="fw-bold text-success">
+                        {{ total_matches }}
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Goals -->
+
+        <div class="col-md-3">
+
+            <div class="card shadow-sm border-0 h-100">
+
+                <div class="card-body text-center">
+
+                    <h6 class="text-muted">
+                        Total Goals
+                    </h6>
+
+                    <h2 class="fw-bold text-warning">
+                        {{ total_goals }}
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Average -->
+
+        <div class="col-md-3">
+
+            <div class="card shadow-sm border-0 h-100">
+
+                <div class="card-body text-center">
+
+                    <h6 class="text-muted">
+                        Goals / Match
+                    </h6>
+
+                    <h2 class="fw-bold text-danger">
+                        {{ average_goals }}
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         TOP PLAYERS
+    =========================================== -->
+
+    <div class="row g-4 mb-5">
+
+
+        <!-- TOP SCORERS -->
+
+        <div class="col-md-6">
+
+            <div class="card shadow h-100">
+
+                <div class="card-body">
+
+                    <h4 class="fw-bold mb-4">
+
+                        ⚽ Top Scorers
+
+                    </h4>
+
+
+                    <div class="table-responsive">
+
+                        <table class="table table-hover align-middle">
+
+                            <thead class="table-dark">
+
+                                <tr>
+
+                                    <th>#</th>
+
+                                    <th>Player</th>
+
+                                    <th>Team</th>
+
+                                    <th class="text-center">
+                                        Goals
+                                    </th>
+
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody>
+
+                                {% for player, goals in top_scorers %}
+
+                                <tr>
+
+                                    <td class="fw-bold">
+                                        {{ loop.index }}
+                                    </td>
+
+                                    <td>
+                                        {{ player.full_name }}
+                                    </td>
+
+                                    <td>
+                                        {{ player.team.name }}
+                                    </td>
+
+                                    <td class="text-center">
+
+                                        <span class="badge bg-success fs-6">
+
+                                            {{ goals }}
+
+                                        </span>
+
+                                    </td>
+
+                                </tr>
+
+                                {% else %}
+
+                                <tr>
+
+                                    <td colspan="4" class="text-center text-muted py-4">
+
+                                        No goals recorded yet.
+
+                                    </td>
+
+                                </tr>
+
+                                {% endfor %}
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- TOP ASSISTS -->
+
+        <div class="col-md-6">
+
+            <div class="card shadow h-100">
+
+                <div class="card-body">
+
+                    <h4 class="fw-bold mb-4">
+
+                        🅰️ Top Assists
+
+                    </h4>
+
+
+                    <div class="table-responsive">
+
+                        <table class="table table-hover align-middle">
+
+                            <thead class="table-dark">
+
+                                <tr>
+
+                                    <th>#</th>
+
+                                    <th>Player</th>
+
+                                    <th>Team</th>
+
+                                    <th class="text-center">
+                                        Assists
+                                    </th>
+
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody>
+
+                                {% for player, assists in top_assists %}
+
+                                <tr>
+
+                                    <td class="fw-bold">
+                                        {{ loop.index }}
+                                    </td>
+
+                                    <td>
+                                        {{ player.full_name }}
+                                    </td>
+
+                                    <td>
+                                        {{ player.team.name }}
+                                    </td>
+
+                                    <td class="text-center">
+
+                                        <span class="badge bg-primary fs-6">
+
+                                            {{ assists }}
+
+                                        </span>
+
+                                    </td>
+
+                                </tr>
+
+                                {% else %}
+
+                                <tr>
+
+                                    <td colspan="4" class="text-center text-muted py-4">
+
+                                        No assists recorded yet.
+
+                                    </td>
+
+                                </tr>
+
+                                {% endfor %}
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ==========================================
+         DISCIPLINE
+    =========================================== -->
+    
+    <div class="row g-4 mb-5">
+    
+        <!-- YELLOW CARDS -->
+    
+        <div class="col-md-6">
+    
+            <div class="card shadow h-100">
+    
+                <div class="card-body">
+    
+                    <h4 class="fw-bold mb-4">
+    
+                        🟨 Top Yellow Cards
+    
+                    </h4>
+    
+                    <div class="table-responsive">
+    
+                        <table class="table table-hover align-middle">
+    
+                            <thead class="table-warning">
+    
+                                <tr>
+    
+                                    <th>#</th>
+    
+                                    <th>Player</th>
+    
+                                    <th>Team</th>
+    
+                                    <th class="text-center">
+                                        Cards
+                                    </th>
+    
+                                </tr>
+    
+                            </thead>
+    
+                            <tbody>
+    
+                                {% for player, yellow_cards in top_yellow_cards %}
+    
+                                <tr>
+    
+                                    <td class="fw-bold">
+                                        {{ loop.index }}
+                                    </td>
+    
+                                    <td>
+                                        {{ player.full_name }}
+                                    </td>
+    
+                                    <td>
+                                        {{ player.team.name }}
+                                    </td>
+    
+                                    <td class="text-center">
+    
+                                        <span class="badge bg-warning text-dark fs-6">
+    
+                                            {{ yellow_cards }}
+    
+                                        </span>
+    
+                                    </td>
+    
+                                </tr>
+    
+                                {% else %}
+    
+                                <tr>
+    
+                                    <td colspan="4" class="text-center text-muted py-4">
+    
+                                        No yellow cards recorded yet.
+    
+                                    </td>
+    
+                                </tr>
+    
+                                {% endfor %}
+    
+                            </tbody>
+    
+                        </table>
+    
+                    </div>
+    
+                </div>
+    
+            </div>
+    
+        </div>
+    
+    
+        <!-- RED CARDS -->
+    
+        <div class="col-md-6">
+    
+            <div class="card shadow h-100">
+    
+                <div class="card-body">
+    
+                    <h4 class="fw-bold mb-4">
+    
+                        🟥 Top Red Cards
+    
+                    </h4>
+    
+                    <div class="table-responsive">
+    
+                        <table class="table table-hover align-middle">
+    
+                            <thead class="table-danger">
+    
+                                <tr>
+    
+                                    <th>#</th>
+    
+                                    <th>Player</th>
+    
+                                    <th>Team</th>
+    
+                                    <th class="text-center">
+                                        Cards
+                                    </th>
+    
+                                </tr>
+    
+                            </thead>
+    
+                            <tbody>
+    
+                                {% for player, red_cards in top_red_cards %}
+    
+                                <tr>
+    
+                                    <td class="fw-bold">
+                                        {{ loop.index }}
+                                    </td>
+    
+                                    <td>
+                                        {{ player.full_name }}
+                                    </td>
+    
+                                    <td>
+                                        {{ player.team.name }}
+                                    </td>
+    
+                                    <td class="text-center">
+    
+                                        <span class="badge bg-danger fs-6">
+    
+                                            {{ red_cards }}
+    
+                                        </span>
+    
+                                    </td>
+    
+                                </tr>
+    
+                                {% else %}
+    
+                                <tr>
+    
+                                    <td colspan="4" class="text-center text-muted py-4">
+    
+                                        No red cards recorded yet.
+    
+                                    </td>
+    
+                                </tr>
+    
+                                {% endfor %}
+    
+                            </tbody>
+    
+                        </table>
+    
+                    </div>
+    
+                </div>
+    
+            </div>
+    
+        </div>
+    
+    </div>
+
+    <!-- ==========================================
+         PLAYER OF THE MATCH
+    =========================================== -->
+    
+    <div class="card shadow mb-5">
+    
+        <div class="card-body">
+    
+            <h4 class="fw-bold mb-4">
+    
+                ⭐ Player of the Match
+    
+            </h4>
+    
+            <div class="table-responsive">
+    
+                <table class="table table-hover align-middle">
+    
+                    <thead class="table-dark">
+    
+                        <tr>
+    
+                            <th>#</th>
+    
+                            <th>Player</th>
+    
+                            <th>Team</th>
+    
+                            <th class="text-center">
+                                Awards
+                            </th>
+    
+                        </tr>
+    
+                    </thead>
+    
+                    <tbody>
+    
+                        {% for player, awards in top_player_of_match %}
+    
+                        <tr>
+    
+                            <td class="fw-bold">
+                                {{ loop.index }}
+                            </td>
+    
+                            <td>
+                                <strong>
+                                    {{ player.full_name }}
+                                </strong>
+                            </td>
+    
+                            <td>
+                                {{ player.team.name }}
+                            </td>
+    
+                            <td class="text-center">
+    
+                                <span class="badge bg-warning text-dark fs-6">
+    
+                                    ⭐ {{ awards }}
+    
+                                </span>
+    
+                            </td>
+    
+                        </tr>
+    
+                        {% else %}
+    
+                        <tr>
+    
+                            <td colspan="4" class="text-center text-muted py-4">
+    
+                                No Player of the Match awards recorded yet.
+    
+                            </td>
+    
+                        </tr>
+    
+                        {% endfor %}
+    
+                    </tbody>
+    
+                </table>
+    
+            </div>
+    
+        </div>
+    
+    </div>
+
+    <!-- ==========================================
+         COMPLETE PLAYER STATISTICS
+    =========================================== -->
+    
+    <div class="card shadow mb-5">
+    
+        <div class="card-body">
+    
+            <h4 class="fw-bold mb-4">
+                📊 Complete Player Statistics
+            </h4>
+    
+            <div class="table-responsive">
+    
+                <table class="table table-hover table-bordered align-middle">
+    
+                    <thead class="table-dark">
+    
+                        <tr>
+    
+                            <th class="text-center">
+                                #
+                            </th>
+    
+                            <th>
+                                Player
+                            </th>
+    
+                            <th>
+                                Team
+                            </th>
+    
+                            <th class="text-center">
+                                Goals
+                            </th>
+    
+                            <th class="text-center">
+                                Assists
+                            </th>
+    
+                            <th class="text-center">
+                                🟨
+                            </th>
+    
+                            <th class="text-center">
+                                🟥
+                            </th>
+    
+                            <th class="text-center">
+                                ⭐ POTM
+                            </th>
+    
+                        </tr>
+    
+                    </thead>
+    
+                    <tbody>
+    
+                        {% for stat in player_statistics %}
+    
+                        <tr>
+    
+                            <td class="text-center fw-bold">
+                                {{ loop.index }}
+                            </td>
+    
+                            <td>
+                                <strong>
+                                    {{ stat.player.full_name }}
+                                </strong>
+                            </td>
+    
+                            <td>
+                                {{ stat.player.team.name }}
+                            </td>
+    
+                            <td class="text-center">
+    
+                                <span class="badge bg-success">
+                                    {{ stat.goals }}
+                                </span>
+    
+                            </td>
+    
+                            <td class="text-center">
+    
+                                <span class="badge bg-primary">
+                                    {{ stat.assists }}
+                                </span>
+    
+                            </td>
+    
+                            <td class="text-center">
+    
+                                <span class="badge bg-warning text-dark">
+                                    {{ stat.yellow_cards }}
+                                </span>
+    
+                            </td>
+    
+                            <td class="text-center">
+    
+                                <span class="badge bg-danger">
+                                    {{ stat.red_cards }}
+                                </span>
+    
+                            </td>
+    
+                            <td class="text-center">
+    
+                                <span class="badge bg-warning text-dark">
+                                    ⭐ {{ stat.potm }}
+                                </span>
+    
+                            </td>
+    
+                        </tr>
+    
+                        {% else %}
+    
+                        <tr>
+    
+                            <td colspan="8" class="text-center text-muted py-4">
+    
+                                No player statistics available yet.
+    
+                            </td>
+    
+                        </tr>
+    
+                        {% endfor %}
+    
+                    </tbody>
+    
+                </table>
+    
+            </div>
+    
+        </div>
+    
+    </div>
+
+
+    <!-- ==========================================
+         RECENT MATCH EVENTS
+    =========================================== -->
+
+    <div class="card shadow mb-5">
+
+        <div class="card-body">
+
+            <h4 class="fw-bold mb-4">
+
+                📋 Match Events
+
+            </h4>
+
+
+            <div class="table-responsive">
+
+                <table class="table table-hover table-bordered align-middle">
+
+                    <thead class="table-dark">
+
+                        <tr>
+
+                            <th>Match</th>
+
+                            <th>Minute</th>
+
+                            <th>Event</th>
+
+                            <th>Player</th>
+
+                            <th>Assist</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        {% for event in match_events %}
+
+                        <tr>
+
+                            <td>
+
+                                <strong>
+
+                                    {{ event.fixture.home_team.name }}
+
+                                    {{ event.fixture.home_score }}
+
+                                    -
+
+                                    {{ event.fixture.away_score }}
+
+                                    {{ event.fixture.away_team.name }}
+
+                                </strong>
+
+                            </td>
+
+
+                            <td>
+
+                                {% if event.minute %}
+
+                                {{ event.minute }}'
+
+                                {% else %}
+
+                                —
+
+                                {% endif %}
+
+                            </td>
+
+
+                            <td>
+
+                                {% if event.event_type == "goal" %}
+
+                                ⚽ Goal
+
+                                {% elif event.event_type == "yellow_card" %}
+
+                                🟨 Yellow Card
+
+                                {% elif event.event_type == "red_card" %}
+
+                                🟥 Red Card
+
+                                {% else %}
+
+                                {{ event.event_type }}
+
+                                {% endif %}
+
+                            </td>
+
+
+                            <td>
+
+                                {{ event.player.full_name }}
+
+                            </td>
+
+
+                            <td>
+
+                                {% if event.assist %}
+
+                                {{ event.assist.full_name }}
+
+                                {% else %}
+
+                                —
+
+                                {% endif %}
+
+                            </td>
+
+                        </tr>
+
+                        {% else %}
+
+                        <tr>
+
+                            <td colspan="5" class="text-center text-muted py-4">
+
+                                No match events recorded yet.
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         LEAGUE TABLE
+    =========================================== -->
+
+    <div class="card shadow mb-5">
+
+        <div class="card-body">
+
+            <h4 class="fw-bold mb-4">
+
+                League Table
+
+            </h4>
+
+
+            <div class="table-responsive">
+
+                <table class="table table-hover table-bordered align-middle">
+
+                    <thead class="table-dark">
+
+                        <tr>
+
+                            <th class="text-center">
+                                #
+                            </th>
+
+                            <th>
+                                Team
+                            </th>
+
+                            <th class="text-center">
+                                P
+                            </th>
+
+                            <th class="text-center">
+                                W
+                            </th>
+
+                            <th class="text-center">
+                                D
+                            </th>
+
+                            <th class="text-center">
+                                L
+                            </th>
+
+                            <th class="text-center">
+                                GF
+                            </th>
+
+                            <th class="text-center">
+                                GA
+                            </th>
+
+                            <th class="text-center">
+                                GD
+                            </th>
+
+                            <th class="text-center">
+                                PTS
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        {% for team in teams %}
+
+                        <tr>
+
+                            <td class="text-center fw-bold">
+                                {{ loop.index }}
+                            </td>
+
+                            <td>
+                                <strong>
+                                    {{ team.name }}
+                                </strong>
+                            </td>
+
+                            <td class="text-center">
+                                {{ team.played }}
+                            </td>
+
+                            <td class="text-center text-success fw-bold">
+                                {{ team.won }}
+                            </td>
+
+                            <td class="text-center">
+                                {{ team.drawn }}
+                            </td>
+
+                            <td class="text-center text-danger">
+                                {{ team.lost }}
+                            </td>
+
+                            <td class="text-center">
+                                {{ team.goals_for }}
+                            </td>
+
+                            <td class="text-center">
+                                {{ team.goals_against }}
+                            </td>
+
+                            <td class="text-center fw-bold">
+
+                                {% if team.goal_difference > 0 %}
+
+                                +{{ team.goal_difference }}
+
+                                {% else %}
+
+                                {{ team.goal_difference }}
+
+                                {% endif %}
+
+                            </td>
+
+                            <td class="text-center">
+
+                                <span class="badge bg-primary fs-6">
+
+                                    {{ team.points }}
+
+                                </span>
+
+                            </td>
+
+                        </tr>
+
+                        {% else %}
+
+                        <tr>
+
+                            <td colspan="10" class="text-center text-muted py-4">
+
+                                No statistics available yet.
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

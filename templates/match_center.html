@@ -1,0 +1,193 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="match-center-page">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <span>Match Centre</span>
+
+            <h2>Aerospace Engineering vs Mechanical Engineering</h2>
+
+        </div>
+
+        <div class="mb-4">
+        
+            <a href="{{ url_for('results') }}" class="btn btn-outline-primary">
+        
+                <i class="bi bi-arrow-left"></i>
+        
+                Back to Results
+        
+            </a>
+        
+        </div>
+
+        <div class="match-score-card">
+
+            <div class="team">
+
+                <i class="bi bi-shield-fill display-3"></i>
+
+                <h4>Aerospace Engineering</h4>
+
+            </div>
+
+            <div class="score">
+
+                <h1>2 - 1</h1>
+
+                <span class="badge bg-success">
+
+                    FULL TIME
+
+                </span>
+
+            </div>
+
+            <div class="team">
+
+                <i class="bi bi-shield-fill display-3"></i>
+
+                <h4>Mechanical Engineering</h4>
+
+            </div>
+
+        </div>
+
+        <div class="row mt-5">
+
+            <div class="col-lg-6">
+
+                <div class="profile-card">
+
+                    <h4>Match Information</h4>
+
+                    <hr>
+
+                    <p><strong>Date:</strong> 9 October 2026</p>
+
+                    <p><strong>Kickoff:</strong> 4:00 PM</p>
+
+                    <p><strong>Venue:</strong> AFIT Sports Complex</p>
+
+                    <p><strong>Referee:</strong> TBA</p>
+
+                </div>
+
+                <div class="profile-card">
+
+                    <h4>Goals</h4>
+
+                    <hr>
+
+                    <p>⚽ Ahmed Ali (23')</p>
+
+                    <p>⚽ Joshua Peter (45+2')</p>
+
+                    <p>⚽ David James (78')</p>
+
+                </div>
+
+                <div class="profile-card">
+
+                    <h4>Player of the Match</h4>
+
+                    <hr>
+
+                    <h5>Ahmed Ali ⭐</h5>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-6">
+
+                <div class="profile-card">
+
+                    <h4>Match Statistics</h4>
+
+                    <hr>
+
+                    <table class="table">
+
+                        <tr>
+
+                            <td>Possession</td>
+
+                            <td>55%</td>
+
+                            <td>45%</td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>Shots</td>
+
+                            <td>12</td>
+
+                            <td>8</td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>Shots on Target</td>
+
+                            <td>7</td>
+
+                            <td>4</td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>Corners</td>
+
+                            <td>6</td>
+
+                            <td>3</td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>Fouls</td>
+
+                            <td>10</td>
+
+                            <td>12</td>
+
+                        </tr>
+
+                    </table>
+
+                </div>
+
+                <div class="profile-card">
+
+                    <h4>Cards</h4>
+
+                    <hr>
+
+                    <p>🟨 Daniel James</p>
+
+                    <p>🟨 Victor Musa</p>
+
+                    <p>🟥 None</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

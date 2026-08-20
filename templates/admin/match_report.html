@@ -1,0 +1,559 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container" style="margin-top:170px;">
+
+    <div class="mb-3">
+        <a href="{{ url_for('record_match_results') }}" class="btn btn-outline-secondary">
+            ← Back
+        </a>
+    </div>
+
+    <div class="card shadow">
+
+        <div class="card-body">
+
+            <form method="POST" action="{{ url_for('match_report', id=fixture.id) }}">
+
+                <h2 class="text-center fw-bold mb-4">
+
+                    Match Report
+
+                </h2>
+
+                <div class="row text-center align-items-center">
+
+                    <div class="col-md-5">
+
+                        <h3>{{ fixture.home_team.name }}</h3>
+
+                    </div>
+
+                    <div class="col-md-2">
+
+                        <h1 class="display-5">
+
+                            VS
+
+                        </h1>
+
+                    </div>
+
+                    <div class="col-md-5">
+
+                        <h3>{{ fixture.away_team.name }}</h3>
+
+                    </div>
+
+                </div>
+
+                <hr>
+
+                <div class="row">
+
+                    <div class="col-md-6">
+
+                        <label class="form-label fw-bold">
+
+                            Home Score
+
+                        </label>
+
+                        <input type="number" class="form-control" name="home_score" min="0" value="0">
+
+                    </div>
+
+                    <div class="col-md-6">
+
+                        <label class="form-label fw-bold">
+
+                            Away Score
+
+                        </label>
+
+                        <input type="number" class="form-control" name="away_score" min="0" value="0">
+
+                    </div>
+
+                </div>
+
+                <hr class="my-4">
+
+                <div class="row">
+
+                    <div class="col-md-6">
+
+                        <p>
+
+                            <strong>Date:</strong>
+
+                            {{ fixture.match_date }}
+
+                        </p>
+
+                        <p>
+
+                            <strong>Time:</strong>
+
+                            {{ fixture.kickoff_time }}
+
+                        </p>
+
+                    </div>
+
+                    <div class="col-md-6">
+
+                        <p>
+
+                            <strong>Venue:</strong>
+
+                            {{ fixture.venue }}
+
+                        </p>
+
+                        <p>
+
+                            <strong>Stage:</strong>
+
+                            {{ fixture.stage }}
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <hr>
+
+                <h4 class="fw-bold text-primary">
+
+                    Home Team Events
+
+                </h4>
+
+                <div id="homeGoals"></div>
+
+                <button type="button" class="btn btn-outline-success btn-sm mb-4" onclick="addHomeGoal()">
+
+                    + Add Home Goal
+
+                </button>
+
+                <hr>
+
+                <h5 class="fw-bold text-warning">
+
+                    Home Cards
+
+                </h5>
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+
+                        Yellow Card
+
+                    </label>
+
+                    <select class="form-select" name="home_yellow_cards[]">
+
+                        <option value="">None</option>
+
+                        {% for player in home_players %}
+
+                        <option value="{{ player.id }}">
+
+                            {{ player.full_name }}
+
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+                <div class="mb-4">
+
+                    <label class="form-label">
+
+                        Red Card
+
+                    </label>
+
+                    <select class="form-select" name="home_red_cards[]">
+
+                        <option value="">None</option>
+
+                        {% for player in home_players %}
+
+                        <option value="{{ player.id }}">
+
+                            {{ player.full_name }}
+
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+                <hr>
+
+                <h4 class="fw-bold text-danger">
+
+                    Away Team Events
+
+                </h4>
+
+                <div id="awayGoals"></div>
+
+                <button type="button" class="btn btn-outline-danger btn-sm mb-4" onclick="addAwayGoal()">
+
+                    + Add Away Goal
+
+                </button>
+
+                <hr>
+
+                <h5 class="fw-bold text-warning">
+
+                    Away Cards
+
+                </h5>
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+
+                        Yellow Card
+
+                    </label>
+
+                    <select class="form-select" name="away_yellow_cards[]">
+
+                        <option value="">None</option>
+
+                        {% for player in away_players %}
+
+                        <option value="{{ player.id }}">
+
+                            {{ player.full_name }}
+
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+                <div class="mb-4">
+
+                    <label class="form-label">
+
+                        Red Card
+
+                    </label>
+
+                    <select class="form-select" name="away_red_cards[]">
+
+                        <option value="">None</option>
+
+                        {% for player in away_players %}
+
+                        <option value="{{ player.id }}">
+
+                            {{ player.full_name }}
+
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+                <hr>
+
+                <h4 class="fw-bold">
+
+                    Player of the Match
+
+                </h4>
+
+                <select class="form-select mb-4" name="player_of_the_match">
+
+                    <option value="">
+                        Select Player
+                    </option>
+
+                    <optgroup label="Home Team">
+
+                        {% for player in home_players %}
+
+                        <option value="{{ player.id }}">
+
+                            {{ player.full_name }}
+
+                        </option>
+
+                        {% endfor %}
+
+                    </optgroup>
+
+                    <optgroup label="Away Team">
+
+                        {% for player in away_players %}
+
+                        <option value="{{ player.id }}">
+
+                            {{ player.full_name }}
+
+                        </option>
+
+                        {% endfor %}
+
+                    </optgroup>
+
+                </select>
+
+                <button type="submit" class="btn btn-success btn-lg w-100">
+                
+                    Save Match Report
+                
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+    function addHomeGoal() {
+
+        let container = document.getElementById("homeGoals");
+
+        let block = document.createElement("div");
+
+        block.className = "card p-3 mb-3";
+
+        block.innerHTML = `
+
+<div class="row">
+
+<div class="col-md-4">
+
+<label class="fw-bold">
+
+Goal Scorer
+
+</label>
+
+<select
+class="form-select mb-2"
+name="home_goal_scorers[]">
+
+{% for player in home_players %}
+
+<option value="{{ player.id }}">
+
+{{ player.full_name }}
+
+</option>
+
+{% endfor %}
+
+</select>
+
+</div>
+
+<div class="col-md-4">
+
+<label class="fw-bold">
+
+Assist
+
+</label>
+
+<select
+class="form-select mb-2"
+name="home_assists[]">
+
+<option value="">
+
+No Assist
+
+</option>
+
+{% for player in home_players %}
+
+<option value="{{ player.id }}">
+
+{{ player.full_name }}
+
+</option>
+
+{% endfor %}
+
+</select>
+
+</div>
+
+<div class="col-md-2">
+
+<label class="fw-bold">
+
+Minute
+
+</label>
+
+<input
+type="number"
+class="form-control"
+name="home_minutes[]"
+min="1"
+max="120">
+
+</div>
+
+<div class="col-md-2 d-flex align-items-end">
+
+<button
+type="button"
+class="btn btn-danger w-100"
+onclick="this.closest('.card').remove()">
+
+Remove
+
+</button>
+
+</div>
+
+</div>
+
+`;
+
+        container.appendChild(block);
+
+    }
+
+
+
+    function addAwayGoal() {
+
+        let container = document.getElementById("awayGoals");
+
+        let block = document.createElement("div");
+
+        block.className = "card p-3 mb-3";
+
+        block.innerHTML = `
+
+<div class="row">
+
+<div class="col-md-4">
+
+<label class="fw-bold">
+
+Goal Scorer
+
+</label>
+
+<select
+class="form-select mb-2"
+name="away_goal_scorers[]">
+
+{% for player in away_players %}
+
+<option value="{{ player.id }}">
+
+{{ player.full_name }}
+
+</option>
+
+{% endfor %}
+
+</select>
+
+</div>
+
+<div class="col-md-4">
+
+<label class="fw-bold">
+
+Assist
+
+</label>
+
+<select
+class="form-select mb-2"
+name="away_assists[]">
+
+<option value="">
+
+No Assist
+
+</option>
+
+{% for player in away_players %}
+
+<option value="{{ player.id }}">
+
+{{ player.full_name }}
+
+</option>
+
+{% endfor %}
+
+</select>
+
+</div>
+
+<div class="col-md-2">
+
+<label class="fw-bold">
+
+Minute
+
+</label>
+
+<input
+type="number"
+class="form-control"
+name="away_minutes[]"
+min="1"
+max="120">
+
+</div>
+
+<div class="col-md-2 d-flex align-items-end">
+
+<button
+type="button"
+class="btn btn-danger w-100"
+onclick="this.closest('.card').remove()">
+
+Remove
+
+</button>
+
+</div>
+
+</div>
+
+`;
+
+        container.appendChild(block);
+
+    }
+
+</script>
+
+{% endblock %}
