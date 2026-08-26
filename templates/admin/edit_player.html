@@ -1,0 +1,149 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <h2 class="fw-bold mb-4">
+        Edit Player
+    </h2>
+
+    <div class="card shadow-sm">
+
+        <div class="card-body">
+
+            <form method="POST">
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+
+                        Full Name
+
+                    </label>
+
+                    <input type="text" class="form-control" name="full_name" value="{{ player.full_name }}" required>
+                </div>
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+
+                        Jersey Number
+
+                    </label>
+
+                    <input type="number" class="form-control" name="jersey_number" value="{{ player.jersey_number }}" required> 
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+
+                        Position
+
+                    </label>
+
+                    <select class="form-select" name="position">
+
+                        <option value="Goalkeeper" {% if player.position=="Goalkeeper" %}selected{% endif %}>
+                            Goalkeeper
+                        </option>
+                        <option value="Right Back" {% if player.position=="Right Back" %}selected{% endif %}>
+                            Right Back
+                        </option>
+                        <option value="Left Back" {% if player.position=="Left Back" %}selected{% endif %}>
+                            Left Back
+                        </option>
+                        <option value="Center Back" {% if player.position=="Center Back" %}selected{% endif %}>
+                            Center Back
+                        </option>
+                        <option value="Defensive Midfielder" {% if player.position=="Defensive Midfielder" %}selected{% endif %}>
+                            Defensive Midfielder
+                        </option>
+                        <option value="Central Midfielder" {% if player.position=="Central Midfielder" %}selected{% endif %}>
+                            Central Midfielder
+                        </option>
+                        <option value="Attacking Midfielder" {% if player.position=="Attacking Midfielder" %}selected{% endif %}>
+                            Attacking Midfielder
+                        </option>
+                        <option value="Right Wing" {% if player.position=="Right Wing" %}selected{% endif %}>
+                            Right Wing
+                        </option>
+                        <option value="Left Wing" {% if player.position=="Left Wing" %}selected{% endif %}>
+                            Left Wing
+                        </option>
+                        <option value="Striker" {% if player.position=="Striker" %}selected{% endif %}>
+                            Striker
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <div class="mb-4">
+
+                    <label class="form-label">
+
+                        Team
+
+                    </label>
+
+                    <select class="form-select" name="team_id">
+                    
+                        {% for team in teams %}
+                    
+                        <option value="{{ team.id }}" {% if player.team_id==team.id %}selected{% endif %}>
+                    
+                            {{ team.name }}
+                    
+                        </option>
+                    
+                        {% endfor %}
+                    
+                    </select>
+
+                    <div class="mb-4">
+
+                        <label class="form-label">
+
+                            Status
+
+                        </label>
+
+                        <select class="form-select" name="status">
+
+                            <option value="Available" {% if player.status=="Available" %}selected{% endif %}>
+                                Available
+                            </option>
+                            
+                            <option value="Injured" {% if player.status=="Injured" %}selected{% endif %}>
+                                Injured
+                            </option>
+                            
+                            <option value="Suspended" {% if player.status=="Suspended" %}selected{% endif %}>
+                                Suspended
+                            </option>
+                            
+                        </select>
+
+                    </div>
+
+                </div>
+
+                <button class="btn btn-success">
+
+                    Update Player
+
+                </button>
+
+                <form method="POST">
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

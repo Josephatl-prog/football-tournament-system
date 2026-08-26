@@ -1,0 +1,853 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="lineup-page">
+
+    <div class="container">
+
+        <!-- ============================= -->
+        <!-- PAGE HEADER -->
+        <!-- ============================= -->
+
+        <div class="section-heading">
+
+            <span>Admin Control</span>
+
+            <h2>
+                {{ fixture.home_team.name }}
+                <span class="mx-2">vs</span>
+                {{ fixture.away_team.name }}
+            </h2>
+
+            <p>
+                {{ fixture.match_date }}
+                |
+                {{ fixture.kickoff_time }}
+                |
+                {{ fixture.venue }}
+            </p>
+
+        </div>
+
+
+        <!-- ============================= -->
+        <!-- ADMIN INSTRUCTION -->
+        <!-- ============================= -->
+
+        <div class="alert alert-info text-center mb-5">
+
+            Select the starting eleven and substitutes for both teams,
+            then publish the lineups for viewers.
+
+        </div>
+
+
+        <!-- ============================= -->
+        <!-- LINEUP FORM -->
+        <!-- ============================= -->
+
+        <form method="POST">
+
+
+            <!-- ================================================= -->
+            <!-- HOME TEAM -->
+            <!-- ================================================= -->
+
+            <div class="lineup-team">
+
+                <h3 class="text-center mb-4">
+
+                    {{ fixture.home_team.name }}
+
+                </h3>
+
+
+                <div class="football-pitch">
+
+                    <div class="halfway-line"></div>
+
+                    <div class="pitch-circle"></div>
+
+
+                    <!-- ===================== -->
+                    <!-- HOME GOALKEEPER -->
+                    <!-- ===================== -->
+
+                    <div class="player-slot goalkeeper">
+
+                        <span class="position-label">
+                            GK
+                        </span>
+
+                        <select name="home_GK" class="player-select" required>
+
+                            <option value="">
+                                Select Goalkeeper
+                            </option>
+
+                            {% for player in fixture.home_team.players_list %}
+
+                            {% if player.position|lower in [
+                            "goalkeeper",
+                            "gk"
+                            ] %}
+
+                            <option value="{{ player.id }}">
+
+                                #{{ player.jersey_number }}
+                                {{ player.full_name }}
+
+                            </option>
+
+                            {% endif %}
+
+                            {% endfor %}
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- ===================== -->
+                    <!-- HOME DEFENCE -->
+                    <!-- ===================== -->
+
+                    <div class="player-slot defender-left">
+
+                        <span class="position-label">
+                            LB
+                        </span>
+
+                        <select name="home_LB" class="player-select" required>
+
+                            <option value="">
+                                Select Player
+                            </option>
+
+                            {% for player in fixture.home_team.players_list %}
+
+                            <option value="{{ player.id }}">
+
+                                #{{ player.jersey_number }}
+                                {{ player.full_name }}
+
+                            </option>
+
+                            {% endfor %}
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="player-slot defender-center-left">
+
+                        <span class="position-label">
+                            CB
+                        </span>
+
+                        <select name="home_CB1" class="player-select" required>
+
+                            <option value="">
+                                Select Player
+                            </option>
+
+                            {% for player in fixture.home_team.players_list %}
+
+                            <option value="{{ player.id }}">
+
+                                #{{ player.jersey_number }}
+                                {{ player.full_name }}
+
+                            </option>
+
+                            {% endfor %}
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="player-slot defender-center-right">
+
+                        <span class="position-label">
+                            CB
+                        </span>
+
+                        <select name="home_CB2" class="player-select" required>
+
+                            <option value="">
+                                Select Player
+                            </option>
+
+                            {% for player in fixture.home_team.players_list %}
+
+                            <option value="{{ player.id }}">
+
+                                #{{ player.jersey_number }}
+                                {{ player.full_name }}
+
+                            </option>
+
+                            {% endfor %}
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="player-slot defender-right">
+
+                        <span class="position-label">
+                            RB
+                        </span>
+
+                        <select name="home_RB" class="player-select" required>
+
+                            <option value="">
+                                Select Player
+                            </option>
+
+                            {% for player in fixture.home_team.players_list %}
+
+                            <option value="{{ player.id }}">
+
+                                #{{ player.jersey_number }}
+                                {{ player.full_name }}
+
+                            </option>
+
+                            {% endfor %}
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- ===================== -->
+                    <!-- HOME MIDFIELD -->
+                    <!-- ===================== -->
+
+                    <div class="player-slot midfielder-left">
+
+                        <span class="position-label">
+                            CM
+                        </span>
+
+                        <select name="home_CM1" class="player-select" required>
+
+                            <option value="">
+                                Select Player
+                            </option>
+
+                            {% for player in fixture.home_team.players_list %}
+
+                            <option value="{{ player.id }}">
+
+                                #{{ player.jersey_number }}
+                                {{ player.full_name }}
+
+                            </option>
+
+                            {% endfor %}
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="player-slot midfielder-center">
+
+                        <span class="position-label">
+                            CM
+                        </span>
+
+                        <select name="home_CM2" class="player-select" required>
+
+                            <option value="">
+                                Select Player
+                            </option>
+
+                            {% for player in fixture.home_team.players_list %}
+
+                            <option value="{{ player.id }}">
+
+                                #{{ player.jersey_number }}
+                                {{ player.full_name }}
+
+                            </option>
+
+                            {% endfor %}
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="player-slot midfielder-right">
+
+                        <span class="position-label">
+                            CM
+                        </span>
+
+                        <select name="home_CM3" class="player-select" required>
+
+                            <option value="">
+                                Select Player
+                            </option>
+
+                            {% for player in fixture.home_team.players_list %}
+
+                            <option value="{{ player.id }}">
+
+                                #{{ player.jersey_number }}
+                                {{ player.full_name }}
+
+                            </option>
+
+                            {% endfor %}
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- ===================== -->
+                    <!-- HOME ATTACK -->
+                    <!-- ===================== -->
+
+                    <div class="player-slot attacker-left">
+
+                        <span class="position-label">
+                            LW
+                        </span>
+
+                        <select name="home_LW" class="player-select" required>
+
+                            <option value="">
+                                Select Player
+                            </option>
+
+                            {% for player in fixture.home_team.players_list %}
+
+                            <option value="{{ player.id }}">
+
+                                #{{ player.jersey_number }}
+                                {{ player.full_name }}
+
+                            </option>
+
+                            {% endfor %}
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="player-slot attacker-center">
+
+                        <span class="position-label">
+                            ST
+                        </span>
+
+                        <select name="home_ST" class="player-select" required>
+
+                            <option value="">
+                                Select Player
+                            </option>
+
+                            {% for player in fixture.home_team.players_list %}
+
+                            <option value="{{ player.id }}">
+
+                                #{{ player.jersey_number }}
+                                {{ player.full_name }}
+
+                            </option>
+
+                            {% endfor %}
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="player-slot attacker-right">
+
+                        <span class="position-label">
+                            RW
+                        </span>
+
+                        <select name="home_RW" class="player-select" required>
+
+                            <option value="">
+                                Select Player
+                            </option>
+
+                            {% for player in fixture.home_team.players_list %}
+
+                            <option value="{{ player.id }}">
+
+                                #{{ player.jersey_number }}
+                                {{ player.full_name }}
+
+                            </option>
+
+                            {% endfor %}
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ============================= -->
+                <!-- HOME SUBSTITUTES -->
+                <!-- ============================= -->
+
+                <div class="substitutes-card mt-4">
+
+                    <h3>
+                        {{ fixture.home_team.name }} Substitutes
+                    </h3>
+
+                    <div class="substitute-grid">
+
+                        {% for player in fixture.home_team.players_list %}
+
+                        <label class="substitute-player">
+
+                            <input type="checkbox" name="home_substitutes" value="{{ player.id }}">
+
+                            <span>
+
+                                #{{ player.jersey_number }}
+                                {{ player.full_name }}
+
+                            </span>
+
+                        </label>
+
+                        {% endfor %}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================================================= -->
+            <!-- AWAY TEAM -->
+            <!-- ================================================= -->
+
+            <div class="lineup-team away-lineup">
+
+                <h3 class="text-center mb-4">
+
+                    {{ fixture.away_team.name }}
+
+                </h3>
+
+
+                <div class="football-pitch">
+
+                    <div class="halfway-line"></div>
+
+                    <div class="pitch-circle"></div>
+
+
+                    <!-- ===================== -->
+                    <!-- AWAY GOALKEEPER -->
+                    <!-- ===================== -->
+
+                    <div class="player-slot goalkeeper">
+
+                        <span class="position-label">
+                            GK
+                        </span>
+
+                        <select name="away_GK" class="player-select" required>
+
+                            <option value="">
+                                Select Goalkeeper
+                            </option>
+
+                            {% for player in fixture.away_team.players_list %}
+
+                            {% if player.position|lower in [
+                            "goalkeeper",
+                            "gk"
+                            ] %}
+
+                            <option value="{{ player.id }}">
+
+                                #{{ player.jersey_number }}
+                                {{ player.full_name }}
+
+                            </option>
+
+                            {% endif %}
+
+                            {% endfor %}
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- ===================== -->
+                    <!-- AWAY DEFENCE -->
+                    <!-- ===================== -->
+
+                    <div class="player-slot defender-left">
+
+                        <span class="position-label">
+                            LB
+                        </span>
+
+                        <select name="away_LB" class="player-select" required>
+
+                            <option value="">
+                                Select Player
+                            </option>
+
+                            {% for player in fixture.away_team.players_list %}
+
+                            <option value="{{ player.id }}">
+
+                                #{{ player.jersey_number }}
+                                {{ player.full_name }}
+
+                            </option>
+
+                            {% endfor %}
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="player-slot defender-center-left">
+
+                        <span class="position-label">
+                            CB
+                        </span>
+
+                        <select name="away_CB1" class="player-select" required>
+
+                            <option value="">
+                                Select Player
+                            </option>
+
+                            {% for player in fixture.away_team.players_list %}
+
+                            <option value="{{ player.id }}">
+
+                                #{{ player.jersey_number }}
+                                {{ player.full_name }}
+
+                            </option>
+
+                            {% endfor %}
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="player-slot defender-center-right">
+
+                        <span class="position-label">
+                            CB
+                        </span>
+
+                        <select name="away_CB2" class="player-select" required>
+
+                            <option value="">
+                                Select Player
+                            </option>
+
+                            {% for player in fixture.away_team.players_list %}
+
+                            <option value="{{ player.id }}">
+
+                                #{{ player.jersey_number }}
+                                {{ player.full_name }}
+
+                            </option>
+
+                            {% endfor %}
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="player-slot defender-right">
+
+                        <span class="position-label">
+                            RB
+                        </span>
+
+                        <select name="away_RB" class="player-select" required>
+
+                            <option value="">
+                                Select Player
+                            </option>
+
+                            {% for player in fixture.away_team.players_list %}
+
+                            <option value="{{ player.id }}">
+
+                                #{{ player.jersey_number }}
+                                {{ player.full_name }}
+
+                            </option>
+
+                            {% endfor %}
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- ===================== -->
+                    <!-- AWAY MIDFIELD -->
+                    <!-- ===================== -->
+
+                    <div class="player-slot midfielder-left">
+
+                        <span class="position-label">
+                            CM
+                        </span>
+
+                        <select name="away_CM1" class="player-select" required>
+
+                            <option value="">
+                                Select Player
+                            </option>
+
+                            {% for player in fixture.away_team.players_list %}
+
+                            <option value="{{ player.id }}">
+
+                                #{{ player.jersey_number }}
+                                {{ player.full_name }}
+
+                            </option>
+
+                            {% endfor %}
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="player-slot midfielder-center">
+
+                        <span class="position-label">
+                            CM
+                        </span>
+
+                        <select name="away_CM2" class="player-select" required>
+
+                            <option value="">
+                                Select Player
+                            </option>
+
+                            {% for player in fixture.away_team.players_list %}
+
+                            <option value="{{ player.id }}">
+
+                                #{{ player.jersey_number }}
+                                {{ player.full_name }}
+
+                            </option>
+
+                            {% endfor %}
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="player-slot midfielder-right">
+
+                        <span class="position-label">
+                            CM
+                        </span>
+
+                        <select name="away_CM3" class="player-select" required>
+
+                            <option value="">
+                                Select Player
+                            </option>
+
+                            {% for player in fixture.away_team.players_list %}
+
+                            <option value="{{ player.id }}">
+
+                                #{{ player.jersey_number }}
+                                {{ player.full_name }}
+
+                            </option>
+
+                            {% endfor %}
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- ===================== -->
+                    <!-- AWAY ATTACK -->
+                    <!-- ===================== -->
+
+                    <div class="player-slot attacker-left">
+
+                        <span class="position-label">
+                            LW
+                        </span>
+
+                        <select name="away_LW" class="player-select" required>
+
+                            <option value="">
+                                Select Player
+                            </option>
+
+                            {% for player in fixture.away_team.players_list %}
+
+                            <option value="{{ player.id }}">
+
+                                #{{ player.jersey_number }}
+                                {{ player.full_name }}
+
+                            </option>
+
+                            {% endfor %}
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="player-slot attacker-center">
+
+                        <span class="position-label">
+                            ST
+                        </span>
+
+                        <select name="away_ST" class="player-select" required>
+
+                            <option value="">
+                                Select Player
+                            </option>
+
+                            {% for player in fixture.away_team.players_list %}
+
+                            <option value="{{ player.id }}">
+
+                                #{{ player.jersey_number }}
+                                {{ player.full_name }}
+
+                            </option>
+
+                            {% endfor %}
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="player-slot attacker-right">
+
+                        <span class="position-label">
+                            RW
+                        </span>
+
+                        <select name="away_RW" class="player-select" required>
+
+                            <option value="">
+                                Select Player
+                            </option>
+
+                            {% for player in fixture.away_team.players_list %}
+
+                            <option value="{{ player.id }}">
+
+                                #{{ player.jersey_number }}
+                                {{ player.full_name }}
+
+                            </option>
+
+                            {% endfor %}
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ============================= -->
+                <!-- AWAY SUBSTITUTES -->
+                <!-- ============================= -->
+
+                <div class="substitutes-card mt-4">
+
+                    <h3>
+                        {{ fixture.away_team.name }} Substitutes
+                    </h3>
+
+                    <div class="substitute-grid">
+
+                        {% for player in fixture.away_team.players_list %}
+
+                        <label class="substitute-player">
+
+                            <input type="checkbox" name="away_substitutes" value="{{ player.id }}">
+
+                            <span>
+
+                                #{{ player.jersey_number }}
+                                {{ player.full_name }}
+
+                            </span>
+
+                        </label>
+
+                        {% endfor %}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================================================= -->
+            <!-- SAVE & PUBLISH -->
+            <!-- ================================================= -->
+
+            <div class="text-center mt-5 mb-5">
+
+                <button type="submit" class="btn btn-success btn-lg px-5">
+
+                    <i class="bi bi-check-circle-fill me-2"></i>
+
+                    Save & Publish Lineups
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</section>
+
+{% endblock %}

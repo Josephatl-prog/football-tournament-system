@@ -1,0 +1,144 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="results-section">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <span>Completed Matches</span>
+
+            <h2>Match Results</h2>
+
+            <p>
+
+                View the latest completed fixtures, goal scorers,
+                assists and Player of the Match.
+
+            </p>
+
+        </div>
+
+        <div class="mb-4">
+        
+            <a href="{{ url_for('fixtures') }}" class="btn btn-outline-primary">
+        
+                <i class="bi bi-arrow-left"></i>
+        
+                Back to Fixtures
+        
+            </a>
+        
+        </div>
+
+        <!-- RESULT CARD -->
+
+        <div class="result-card">
+
+            <div class="result-header">
+
+                <span class="group-badge">
+
+                    Group A
+
+                </span>
+
+                <span class="match-date">
+
+                    20 July 2026
+
+                </span>
+
+            </div>
+
+            <div class="scoreboard">
+
+                <div class="team">
+
+                    Aerospace Engineering
+
+                </div>
+
+                <div class="score">
+
+                    2 - 1
+
+                </div>
+
+                <div class="team">
+
+                    Mechanical Engineering
+
+                </div>
+
+            </div>
+
+            <div class="match-events">
+            
+                <div class="team-events home-events">
+            
+                    <div class="goal-event">
+            
+                        ⚽ Ahmed Ali (23')
+            
+                        <br>
+            
+                        <small>🎯 Assist: Musa Ibrahim</small>
+            
+                    </div>
+            
+                    <div class="goal-event">
+            
+                        ⚽ Joshua Peter (45+2')
+            
+                        <br>
+            
+                        <small>🎯 Assist: David James</small>
+            
+                    </div>
+            
+                </div>
+            
+                <div class="team-events away-events">
+            
+                    <div class="goal-event">
+            
+                        ⚽ Victor Musa (78')
+            
+                        <br>
+            
+                        <small>Unassisted</small>
+            
+                    </div>
+            
+                </div>
+            
+            </div>
+
+            <div class="result-footer">
+
+                <span>
+
+                    ⭐ Player of the Match:
+
+                    Ahmed Ali
+
+                </span>
+
+                <a href="{{ url_for('match_center') }}" class="fixture-btn">
+
+                    Match Report →
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

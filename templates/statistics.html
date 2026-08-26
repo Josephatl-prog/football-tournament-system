@@ -1,0 +1,859 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="statistics-page">
+
+    <div class="container">
+
+        <!-- Heading -->
+
+        <div class="section-heading">
+
+            <span>Tournament Analytics</span>
+
+            <h2>Statistics Centre</h2>
+
+            <p>
+
+                Live player and team statistics from the
+                AFIT Football Championship.
+
+            </p>
+
+        </div>
+
+
+        <!-- ========================= -->
+        <!-- QUICK STATISTICS -->
+        <!-- ========================= -->
+
+        <div class="row g-4 mb-5">
+
+            <!-- Matches -->
+
+            <div class="col-lg col-md-4 col-6">
+
+                <div class="stat-card">
+
+                    <i class="bi bi-calendar-check-fill"></i>
+
+                    <h3>
+                        {{ total_matches }}
+                    </h3>
+
+                    <p>Matches</p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Goals -->
+
+            <div class="col-lg col-md-4 col-6">
+
+                <div class="stat-card">
+
+                    <i class="bi bi-bullseye"></i>
+
+                    <h3>
+                        {{ total_goals }}
+                    </h3>
+
+                    <p>Goals</p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Assists -->
+
+            <div class="col-lg col-md-4 col-6">
+
+                <div class="stat-card">
+
+                    <i class="bi bi-person-check-fill"></i>
+
+                    <h3>
+                        {{ total_assists }}
+                    </h3>
+
+                    <p>Assists</p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Yellow Cards -->
+
+            <div class="col-lg col-md-4 col-6">
+
+                <div class="stat-card">
+
+                    <i class="bi bi-square-fill"></i>
+
+                    <h3>
+                        {{ total_yellow_cards }}
+                    </h3>
+
+                    <p>Yellow Cards</p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Red Cards -->
+
+            <div class="col-lg col-md-4 col-6">
+
+                <div class="stat-card">
+
+                    <i class="bi bi-stop-circle-fill"></i>
+
+                    <h3>
+                        {{ total_red_cards }}
+                    </h3>
+
+                    <p>Red Cards</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ========================= -->
+        <!-- PLAYER STATISTICS -->
+        <!-- ========================= -->
+
+        <div class="stats-dashboard">
+
+
+            <!-- LEFT MENU -->
+
+            <div class="stats-sidebar">
+
+                <h3>Player Statistics</h3>
+
+
+                <button class="stats-link active" data-target="goals">
+
+                    ⚽ Top Scorers
+
+                </button>
+
+
+                <button class="stats-link" data-target="assists">
+
+                    🎯 Top Assists
+
+                </button>
+
+
+                <button class="stats-link" data-target="keepers">
+
+                    🧤 Goalkeepers
+
+                </button>
+
+
+                <button class="stats-link" data-target="discipline">
+
+                    🟨 Discipline
+
+                </button>
+
+
+                <button class="stats-link" data-target="awards">
+
+                    ⭐ Awards
+
+                </button>
+
+            </div>
+
+
+            <!-- RIGHT CONTENT -->
+
+            <div class="stats-content">
+
+
+                <!-- ========================= -->
+                <!-- TOP SCORERS -->
+                <!-- ========================= -->
+
+                <div class="stats-panel active" id="goals">
+
+                    <h2>
+                        Top Goal Scorers
+                    </h2>
+
+
+                    <table class="table">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>Rank</th>
+
+                                <th>Player</th>
+
+                                <th>Department</th>
+
+                                <th>Goals</th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody>
+
+                            {% for player, goals in top_scorers %}
+
+                            <tr>
+
+                                <td>
+
+                                    {% if loop.index == 1 %}
+
+                                    🥇
+
+                                    {% elif loop.index == 2 %}
+
+                                    🥈
+
+                                    {% elif loop.index == 3 %}
+
+                                    🥉
+
+                                    {% else %}
+
+                                    {{ loop.index }}
+
+                                    {% endif %}
+
+                                </td>
+
+
+                                <td style="color: black !important;">
+                                    {{ player.full_name }}
+                                </td>
+
+
+                                <td>
+
+                                    {{ player.team.name }}
+
+                                </td>
+
+
+                                <td>
+
+                                    <strong>
+                                        {{ goals }}
+                                    </strong>
+
+                                </td>
+
+                            </tr>
+
+                            {% else %}
+
+                            <tr>
+
+                                <td colspan="4" class="text-center text-muted">
+
+                                    No goals recorded yet.
+
+                                </td>
+
+                            </tr>
+
+                            {% endfor %}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+
+                <!-- ========================= -->
+                <!-- TOP ASSISTS -->
+                <!-- ========================= -->
+
+                <div class="stats-panel" id="assists">
+
+                    <h2>
+                        Top Assist Providers
+                    </h2>
+
+
+                    <table class="table">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>Rank</th>
+
+                                <th>Player</th>
+
+                                <th>Department</th>
+
+                                <th>Assists</th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody>
+
+                            {% for player, assists in top_assists %}
+
+                            <tr>
+
+                                <td>
+
+                                    {% if loop.index == 1 %}
+
+                                    🥇
+
+                                    {% elif loop.index == 2 %}
+
+                                    🥈
+
+                                    {% elif loop.index == 3 %}
+
+                                    🥉
+
+                                    {% else %}
+
+                                    {{ loop.index }}
+
+                                    {% endif %}
+
+                                </td>
+
+
+                                <td style="color: black !important;">
+                                    {{ player.full_name }}
+                                </td>
+
+
+                                <td>
+
+                                    {{ player.team.name }}
+
+                                </td>
+
+
+                                <td>
+
+                                    <strong>
+                                        {{ assists }}
+                                    </strong>
+
+                                </td>
+
+                            </tr>
+
+                            {% else %}
+
+                            <tr>
+
+                                <td colspan="4" class="text-center text-muted">
+
+                                    No assists recorded yet.
+
+                                </td>
+
+                            </tr>
+
+                            {% endfor %}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+
+                <!-- ========================= -->
+                <!-- GOALKEEPERS -->
+                <!-- ========================= -->
+
+                <div class="stats-panel" id="keepers">
+
+                    <h2>Golden Glove</h2>
+
+                    <table class="table">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>Rank</th>
+
+                                <th>Goalkeeper</th>
+
+                                <th>Department</th>
+
+                                <th>Clean Sheets</th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            {% for goalkeeper in goalkeepers %}
+
+                            <tr>
+
+                                <td>
+
+                                    {% if loop.index == 1 %}
+                                    🥇
+                                    {% elif loop.index == 2 %}
+                                    🥈
+                                    {% elif loop.index == 3 %}
+                                    🥉
+                                    {% else %}
+                                    {{ loop.index }}
+                                    {% endif %}
+
+                                </td>
+
+                                <td>
+
+                                    <strong>
+                                        {{ goalkeeper.player.full_name }}
+                                    </strong>
+
+                                </td>
+
+                                <td>
+
+                                    {{ goalkeeper.team.name }}
+
+                                </td>
+
+                                <td>
+
+                                    <strong>
+                                        {{ goalkeeper.clean_sheets }}
+                                    </strong>
+
+                                </td>
+
+                            </tr>
+
+                            {% else %}
+
+                            <tr>
+
+                                <td colspan="4" class="text-center text-muted">
+
+                                    No goalkeeper statistics available yet.
+
+                                </td>
+
+                            </tr>
+
+                            {% endfor %}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+                <!-- ========================= -->
+                <!-- DISCIPLINE -->
+                <!-- ========================= -->
+
+                <div class="stats-panel" id="discipline">
+
+                    <h2>
+                        Discipline
+                    </h2>
+
+
+                    <table class="table">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>Rank</th>
+
+                                <th>Player</th>
+
+                                <th>Department</th>
+
+                                <th>Yellow</th>
+
+                                <th>Red</th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody>
+
+                            {% for player, yellow_cards, red_cards in discipline %}
+
+                            <tr>
+
+                                <td>
+
+                                    {{ loop.index }}
+
+                                </td>
+
+
+                                <td style="color: black !important;">
+                                    {{ player.full_name }}
+                                </td>
+
+
+                                <td>
+
+                                    {{ player.team.name }}
+
+                                </td>
+
+
+                                <td>
+
+                                    🟨 {{ yellow_cards }}
+
+                                </td>
+
+
+                                <td>
+
+                                    🟥 {{ red_cards }}
+
+                                </td>
+
+                            </tr>
+
+                            {% else %}
+
+                            <tr>
+
+                                <td colspan="5" class="text-center text-muted">
+
+                                    No disciplinary records yet.
+
+                                </td>
+
+                            </tr>
+
+                            {% endfor %}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+
+                <!-- ========================= -->
+                <!-- AWARDS -->
+                <!-- ========================= -->
+
+                <div class="stats-panel" id="awards">
+
+                    <h2>
+                        Current Awards
+                    </h2>
+
+                    <p>
+                        Tournament awards will be connected
+                        here later.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ========================= -->
+        <!-- TEAM STATISTICS -->
+        <!-- ========================= -->
+
+        <div class="section-heading mt-5">
+
+            <span>Departments</span>
+
+            <h2>Team Statistics</h2>
+
+        </div>
+
+
+        <div class="row g-4">
+
+
+            <!-- Highest Scoring -->
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="award-card">
+
+                    <h4>
+                        Highest Scoring Team
+                    </h4>
+
+
+                    {% if highest_scoring_team %}
+
+                    <h3>
+                        {{ highest_scoring_team.name }}
+                    </h3>
+
+
+                    <p>
+                        {{ highest_scoring_team.goals_for }}
+                        Goals
+                    </p>
+
+                    {% else %}
+
+                    <h3>
+                        —
+                    </h3>
+
+                    <p>
+                        No data yet
+                    </p>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+
+            <!-- Best Defence -->
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="award-card">
+
+                    <h4>
+                        Best Defence
+                    </h4>
+
+
+                    {% if best_defence_team %}
+
+                    <h3>
+                        {{ best_defence_team.name }}
+                    </h3>
+
+
+                    <p>
+                        {{ best_defence_team.goals_against }}
+                        Goals Conceded
+                    </p>
+
+                    {% else %}
+
+                    <h3>
+                        —
+                    </h3>
+
+                    <p>
+                        No data yet
+                    </p>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+
+            <!-- Most Wins -->
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="award-card">
+
+                    <h4>
+                        Most Wins
+                    </h4>
+
+
+                    {% if most_wins_team %}
+
+                    <h3>
+                        {{ most_wins_team.name }}
+                    </h3>
+
+
+                    <p>
+                        {{ most_wins_team.won }}
+                        Wins
+                    </p>
+
+                    {% else %}
+
+                    <h3>
+                        —
+                    </h3>
+
+                    <p>
+                        No data yet
+                    </p>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+
+            <!-- Clean Sheets -->
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="award-card">
+
+                    <h4>
+                        Most Clean Sheets
+                    </h4>
+
+
+                    {% if most_clean_sheets_team %}
+
+                    <h3>
+                        {{ most_clean_sheets_team.name }}
+                    </h3>
+
+
+                    <p>
+                        {{
+                        clean_sheets.get(
+                        most_clean_sheets_team.id,
+                        0
+                        )
+                        }}
+                    </p>
+
+                    {% else %}
+
+                    <h3>
+                        —
+                    </h3>
+
+                    <p>
+                        No data yet
+                    </p>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ========================= -->
+<!-- STATISTICS TAB SCRIPT -->
+<!-- ========================= -->
+
+<script>
+
+    document
+        .querySelectorAll(".stats-link")
+        .forEach(button => {
+
+            button.addEventListener(
+                "click",
+                function () {
+
+                    /*
+                     * Remove active state
+                     * from all buttons.
+                     */
+
+                    document
+                        .querySelectorAll(".stats-link")
+                        .forEach(btn => {
+
+                            btn.classList.remove(
+                                "active"
+                            );
+
+                        });
+
+
+                    /*
+                     * Hide all panels.
+                     */
+
+                    document
+                        .querySelectorAll(".stats-panel")
+                        .forEach(panel => {
+
+                            panel.classList.remove(
+                                "active"
+                            );
+
+                        });
+
+
+                    /*
+                     * Activate clicked button.
+                     */
+
+                    this.classList.add(
+                        "active"
+                    );
+
+
+                    /*
+                     * Show matching panel.
+                     */
+
+                    const target =
+                        document.getElementById(
+                            this.dataset.target
+                        );
+
+                    if (target) {
+
+                        target.classList.add(
+                            "active"
+                        );
+
+                    }
+
+                }
+            );
+
+        });
+
+</script>
+
+{% endblock %}

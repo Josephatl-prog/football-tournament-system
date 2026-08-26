@@ -1,0 +1,419 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container" style="margin-top: 170px;">
+
+    <!-- HEADER -->
+
+    <div class="mb-4">
+
+        <a href="{{ url_for('admin_dashboard') }}" class="btn btn-outline-secondary mb-3">
+
+            ← Dashboard
+
+        </a>
+
+        <h2 class="fw-bold">
+            Tournament Group Draw
+        </h2>
+
+        <p class="text-muted">
+            Select four teams for each group. A team can only belong
+            to one group.
+        </p>
+
+    </div>
+
+
+    <!-- GROUP DRAW FORM -->
+
+    <form method="POST" id="groupDrawForm">
+
+        <div class="row g-4">
+
+            {% for group in groups %}
+
+            <div class="col-lg-6">
+
+                <div class="card shadow-sm border-0 h-100">
+
+                    <div class="card-header bg-dark text-white">
+
+                        <div class="d-flex justify-content-between align-items-center">
+
+                            <h4 class="mb-0">
+                                Group {{ group.name }}
+                            </h4>
+
+                            <span class="badge bg-light text-dark">
+                                0 / 4
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="card-body">
+
+                        <!-- TEAM SLOT 1 -->
+
+                        <div class="mb-3">
+
+                            <label class="form-label fw-bold">
+                                Team 1
+                            </label>
+
+                            <select name="group_{{ group.id }}" class="form-select team-select"
+                                data-group="{{ group.id }}">
+
+                                <option value="">
+                                    -- Select Team --
+                                </option>
+
+                                {% for team in teams %}
+
+                                <option value="{{ team.id }}">
+                                    {{ team.name }}
+                                </option>
+
+                                {% endfor %}
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- TEAM SLOT 2 -->
+
+                        <div class="mb-3">
+
+                            <label class="form-label fw-bold">
+                                Team 2
+                            </label>
+
+                            <select name="group_{{ group.id }}" class="form-select team-select"
+                                data-group="{{ group.id }}">
+
+                                <option value="">
+                                    -- Select Team --
+                                </option>
+
+                                {% for team in teams %}
+
+                                <option value="{{ team.id }}">
+                                    {{ team.name }}
+                                </option>
+
+                                {% endfor %}
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- TEAM SLOT 3 -->
+
+                        <div class="mb-3">
+
+                            <label class="form-label fw-bold">
+                                Team 3
+                            </label>
+
+                            <select name="group_{{ group.id }}" class="form-select team-select"
+                                data-group="{{ group.id }}">
+
+                                <option value="">
+                                    -- Select Team --
+                                </option>
+
+                                {% for team in teams %}
+
+                                <option value="{{ team.id }}">
+                                    {{ team.name }}
+                                </option>
+
+                                {% endfor %}
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- TEAM SLOT 4 -->
+
+                        <div class="mb-3">
+
+                            <label class="form-label fw-bold">
+                                Team 4
+                            </label>
+
+                            <select name="group_{{ group.id }}" class="form-select team-select"
+                                data-group="{{ group.id }}">
+
+                                <option value="">
+                                    -- Select Team --
+                                </option>
+
+                                {% for team in teams %}
+
+                                <option value="{{ team.id }}">
+                                    {{ team.name }}
+                                </option>
+
+                                {% endfor %}
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+
+        <!-- SAVE BUTTON -->
+
+        <div class="text-center mt-5 mb-5">
+
+            <button type="submit" class="btn btn-primary btn-lg px-5">
+
+                Save Group Draw
+
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
+
+
+<!-- ========================= -->
+<!-- GROUP DRAW JAVASCRIPT -->
+<!-- ========================= -->
+
+<script>
+
+    document.addEventListener("DOMContentLoaded", function () {
+
+        const selects =
+            document.querySelectorAll(".team-select");
+
+
+        function updateSelections() {
+
+            /*
+             * Get every team currently selected.
+             */
+
+            const selectedTeams = new Set();
+
+            selects.forEach(select => {
+
+                if (select.value !== "") {
+
+                    selectedTeams.add(select.value);
+
+                }
+
+            });
+
+
+            /*
+             * Update every dropdown.
+             */
+
+            selects.forEach(select => {
+
+                const currentValue =
+                    select.value;
+
+
+                select.querySelectorAll("option").forEach(option => {
+
+                    /*
+                     * Keep the empty option available.
+                     */
+
+                    if (option.value === "") {
+
+                        option.disabled = false;
+
+                        return;
+
+                    }
+
+
+                    /*
+                     * If another dropdown has selected
+                     * this team, disable it here.
+                     *
+                     * Keep the currently selected option
+                     * enabled in its own dropdown.
+                     */
+
+                    if (
+                        selectedTeams.has(option.value) &&
+                        option.value !== currentValue
+                    ) {
+
+                        option.disabled = true;
+
+                    }
+
+                    else {
+
+                        option.disabled = false;
+
+                    }
+
+                });
+
+            });
+
+
+            /*
+             * Update the "X / 4" counter
+             * for every group.
+             */
+
+            const groups = {};
+
+            selects.forEach(select => {
+
+                const groupId =
+                    select.dataset.group;
+
+                if (!groups[groupId]) {
+
+                    groups[groupId] = 0;
+
+                }
+
+                if (select.value !== "") {
+
+                    groups[groupId]++;
+
+                }
+
+            });
+
+
+            document
+                .querySelectorAll(".card")
+                .forEach(card => {
+
+                    const selectsInCard =
+                        card.querySelectorAll(".team-select");
+
+                    if (selectsInCard.length === 0) {
+
+                        return;
+
+                    }
+
+                    const groupId =
+                        selectsInCard[0].dataset.group;
+
+                    const badge =
+                        card.querySelector(".badge");
+
+                    if (badge) {
+
+                        badge.textContent =
+                            `${groups[groupId] || 0} / 4`;
+
+                    }
+
+                });
+
+        }
+
+
+        /*
+         * Whenever a team is selected,
+         * refresh all dropdowns.
+         */
+
+        selects.forEach(select => {
+
+            select.addEventListener(
+                "change",
+                updateSelections
+            );
+
+        });
+
+
+        /*
+         * Initial state.
+         */
+
+        updateSelections();
+
+
+        /*
+         * Make sure every group has exactly
+         * four teams before saving.
+         */
+
+        document
+            .getElementById("groupDrawForm")
+            .addEventListener("submit", function (event) {
+
+                let valid = true;
+
+
+                document
+                    .querySelectorAll(".col-lg-6")
+                    .forEach(groupCard => {
+
+                        const groupSelects =
+                            groupCard.querySelectorAll(".team-select");
+
+                        let count = 0;
+
+                        groupSelects.forEach(select => {
+
+                            if (select.value !== "") {
+
+                                count++;
+
+                            }
+
+                        });
+
+                        if (count !== 4) {
+
+                            valid = false;
+
+                        }
+
+                    });
+
+
+                if (!valid) {
+
+                    event.preventDefault();
+
+                    alert(
+                        "Each group must contain exactly 4 teams before saving."
+                    );
+
+                }
+
+            });
+
+    });
+
+</script>
+
+{% endblock %}

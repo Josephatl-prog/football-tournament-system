@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="mb-5">
+        <h1 class="fw-bold">Admin Dashboard</h1>
+        <p class="text-muted">
+            Welcome to the AFIT Final Year Football Tournament Management System.
+        </p>
+    </div>
+
+    <div class="row g-4 mb-5">
+
+        <div class="col-lg-3 col-md-6">
+            <div class="card shadow-sm border-0">
+                <div class="card-body text-center">
+                    <h6 class="text-muted">Teams</h6>
+                    <h2 class="fw-bold">16</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+            <div class="card shadow-sm border-0">
+                <div class="card-body text-center">
+                    <h6 class="text-muted">Players</h6>
+                    <h2 class="fw-bold">320</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+            <div class="card shadow-sm border-0">
+                <div class="card-body text-center">
+                    <h6 class="text-muted">Fixtures</h6>
+                    <h2 class="fw-bold">24</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+            <div class="card shadow-sm border-0">
+                <div class="card-body text-center">
+                    <h6 class="text-muted">Goals</h6>
+                    <h2 class="fw-bold">0</h2>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row g-3">
+
+        <div class="col-md-4">
+            <a href="{{ url_for('manage_teams') }}" class="btn btn-primary w-100 py-3">
+            
+                Manage Teams
+            
+            </a>
+        </div>
+
+        <div class="col-md-4">
+            <a href="{{ url_for('manage_players') }}" class="btn btn-success w-100 py-3">
+        
+                Manage Players
+        
+            </a>
+        </div>
+
+        <div class="col-md-4">
+            <a href="{{ url_for('manage_fixtures') }}" class="btn btn-primary w-100 py-3">
+            
+                Manage Fixtures
+            
+            </a>
+        </div>
+
+        <div class="col-md-4">
+            <a href="{{ url_for('record_match_results') }}" class="btn btn-primary w-100 py-3">
+            
+                Record Match Results
+            
+            </a>
+        </div>
+
+        <div class="col-md-4">
+            <button class="btn btn-info w-100 py-3">
+                Tournament Settings
+            </button>
+        </div>
+
+        <div class="col-md-4">
+            <a href="{{ url_for('view_statistics') }}" class="btn btn-dark w-100 py-3">
+            
+                View Statistics
+            
+            </a>
+        </div>
+
+        <div class="col-md-4">
+            <a href="{{ url_for('group_draw') }}" class="btn btn-dark w-100 py-3">
+                
+                Group Draw
+                
+            </a>
+        </div>
+        
+        <div class="col-md-4">
+            <a href="{{ url_for('manage_lineups') }}" class="btn btn-success w-100 py-3">
+            
+                Manage Lineups
+            
+            </a>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+ w-100 py-3">

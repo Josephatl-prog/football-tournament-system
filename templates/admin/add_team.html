@@ -1,0 +1,95 @@
+{ % extends "base.html" % }
+
+{ % block content % }
+
+<div class="container" style="margin-top:150px;">
+
+   <h2 class = "fw-bold mb-4" >
+
+    Add New Team
+
+    </h2 >
+
+    <div class = "card shadow-sm" >
+
+       <div class = "card-body" >
+
+           <form method = "POST" >
+
+               <div class = "mb-3" >
+
+                   <label class = "form-label" >
+
+                    Department Name
+
+                    </label >
+
+                    <input
+                     type = "text"
+                      class = "form-control"
+                       name = "name"
+                        required >
+
+                </div >
+
+                <div class = "mb-3" >
+
+                   <label class = "form-label" >
+
+                    Captain
+
+                    </label >
+
+                    <input
+                     type = "text"
+                      class = "form-control"
+                       name = "captain" >
+
+                </div >
+
+                <div class = "mb-3" >
+
+                   <label class = "form-label" >
+
+                    Manager
+
+                    </label >
+
+                    <input
+                     type = "text"
+                      class = "form-control"
+                       name = "manager" >
+
+                </div >
+
+                <div class = "mb-4" >
+
+                   <label class = "form-label" >
+
+                    Number of Players
+
+                    </label >
+
+                    <input
+                     type = "number"
+                      class = "form-control"
+                       name = "players"
+                        value = "20" >
+
+                </div >
+
+                <button class = "btn btn-success" >
+
+                Save Team
+
+                </button >
+
+            </form >
+
+        </div >
+
+    </div >
+
+</div >
+
+{ % endblock % }

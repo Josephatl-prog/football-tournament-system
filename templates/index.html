@@ -1,0 +1,1093 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="hero">
+
+    <div class="container">
+
+        <div class="hero-content">
+
+            <div class="hero-icon">
+
+                <i class="bi bi-trophy-fill"></i>
+
+            </div>
+
+            <h1>
+
+                AFIT Football Championship 2026
+
+            </h1>
+
+            <h2>
+
+                Final Year Inter-Departmental Championship
+
+            </h2>
+
+            <p>
+
+                <strong>One Tournament. One Champion. One Legacy.</strong>
+
+                <br><br>
+
+                Professional tournament management platform for fixtures,
+                standings, results, player statistics and championship
+                administration at the Air Force Institute of Technology.
+
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="{{ url_for('tournament_hub') }}" class="btn btn-success btn-lg">
+
+                    <i class="bi bi-trophy-fill me-2"></i>
+
+                    Enter Tournament
+
+                </a>
+
+                <a href="{{ url_for('fixtures') }}" class="btn btn-outline-dark btn-lg">
+                
+                    <i class="bi bi-calendar-event me-2"></i>
+                
+                    View Fixtures
+                
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section class="statistics-section" data-aos="fade-up">
+
+    <div class="container">
+
+        <div class="row g-4">
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="stat-card">
+
+                    <i class="bi bi-people-fill"></i>
+
+                    <h2 class="counter" data-target="16">0</h2>
+                    <p>Departments</p>
+                
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="stat-card">
+
+                    <i class="bi bi-calendar-event"></i>
+
+                    <h2 class="counter" data-target="24">0</h2>
+                    <p>Matches</p>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="stat-card">
+
+                    <i class="bi bi-trophy-fill"></i>
+
+                    <h2 class="counter" data-target="8">0</h2>
+                    <p>Knockout Teams</p>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="stat-card">
+
+                    <i class="bi bi-person-fill"></i>
+
+                    <h2 class="counter" data-target="320">0</h2>
+                    <p>Registered Players</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section class="dashboard-section" data-aos="fade-up">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <span>Tournament Hub</span>
+
+            <h2>Everything At Your Fingertips</h2>
+
+            <p>
+
+                Quickly access fixtures, results, standings and departments.
+
+            </p>
+
+        </div>
+
+        <div class="row g-4">
+
+            <div class="col-lg-3 col-md-6">
+
+                <a href="{{ url_for('fixtures') }}" class="hub-card">
+
+                    <div class="hub-icon">
+                        <i class="bi bi-calendar-event-fill"></i>
+                    </div>
+
+                    <h4>Fixtures</h4>
+
+                    <p>Upcoming matches</p>
+
+                </a>
+
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+
+                <a href="{{ url_for('results') }}" class="hub-card">
+
+                    <div class="hub-icon">
+                        <i class="bi bi-trophy-fill"></i>
+                    </div>
+
+                    <h4>Results</h4>
+
+                    <p>Latest scores</p>
+
+                </a>
+
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+
+                <a href="{{ url_for('standings') }}" class="hub-card">
+
+                    <div class="hub-icon">
+                        <i class="bi bi-bar-chart-fill"></i>
+                    </div>
+
+                    <h4>Standings</h4>
+
+                    <p>Live group table</p>
+
+                </a>
+
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+
+                <a href="{{ url_for('teams') }}" class="hub-card">
+
+                    <div class="hub-icon">
+                        <i class="bi bi-people-fill"></i>
+                    </div>
+
+                    <h4>Teams</h4>
+
+                    <p>16 Departments</p>
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section class="fixtures-section" data-aos="fade-up">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <span>Upcoming Fixtures</span>
+
+            <h2>Next Matches</h2>
+
+            <p>
+                Follow every fixture in the AFIT Football Championship.
+            </p>
+
+        </div>
+
+        <div class="row g-4">
+        
+            <!-- Fixture 1 -->
+            <div class="col-12">
+        
+                <div class="fixture-card">
+        
+                    <div class="fixture-group">
+                        Group A
+                    </div>
+        
+                    <div class="fixture-teams">
+        
+                        <h4>Aerospace Engineering</h4>
+        
+                        <div class="vs">
+                            VS
+                        </div>
+        
+                        <h4>Mechanical Engineering</h4>
+        
+                    </div>
+        
+                    <div class="fixture-info">
+        
+                        <p><i class="bi bi-calendar3"></i> 20 July 2026</p>
+        
+                        <p><i class="bi bi-clock"></i> 4:00 PM</p>
+        
+                        <p><i class="bi bi-geo-alt-fill"></i> AFIT Football Pitch</p>
+        
+                    </div>
+        
+                    <a href="{{ url_for('fixtures') }}" class="fixture-btn">
+                    
+                        View All Fixtures
+                    
+                    </a>
+
+                </div>
+        
+            </div>
+        
+            <!-- Fixture 2 -->
+            <div class="col-12">
+        
+                <div class="fixture-card">
+        
+                    <div class="fixture-group">
+                        Group B
+                    </div>
+        
+                    <div class="fixture-teams">
+        
+                        <h4>Computer Science</h4>
+        
+                        <div class="vs">
+                            VS
+                        </div>
+        
+                        <h4>Cyber Security</h4>
+        
+                    </div>
+        
+                    <div class="fixture-info">
+        
+                        <p><i class="bi bi-calendar3"></i> 21 July 2026</p>
+        
+                        <p><i class="bi bi-clock"></i> 2:00 PM</p>
+        
+                        <p><i class="bi bi-geo-alt-fill"></i> AFIT Football Pitch</p>
+        
+                    </div>
+        
+                    <a href="{{ url_for('fixtures') }}" class="fixture-btn">
+                    
+                        View All Fixtures
+                    
+                    </a>
+        
+                </div>
+        
+            </div>
+        
+            <!-- Fixture 3 -->
+            <div class="col-12">
+        
+                <div class="fixture-card">
+        
+                    <div class="fixture-group">
+                        Group C
+                    </div>
+        
+                    <div class="fixture-teams">
+        
+                        <h4>Electrical Engineering</h4>
+        
+                        <div class="vs">
+                            VS
+                        </div>
+        
+                        <h4>Mechatronics Engineering</h4>
+        
+                    </div>
+        
+                    <div class="fixture-info">
+        
+                        <p><i class="bi bi-calendar3"></i> 21 July 2026</p>
+        
+                        <p><i class="bi bi-clock"></i> 5:00 PM</p>
+        
+                        <p><i class="bi bi-geo-alt-fill"></i> AFIT Football Pitch</p>
+        
+                    </div>
+        
+                    <a href="{{ url_for('fixtures') }}" class="fixture-btn">
+                    
+                        View All Fixtures
+                    
+                    </a>
+        
+                </div>
+        
+            </div>
+        
+</section>
+
+<section class="matches-section"
+         data-aos="fade-up">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <span>Match Centre</span>
+
+            <h2>Latest Match Results</h2>
+
+            <p>
+
+                Catch up with recently completed matches and standout performances.
+
+            </p>
+
+        </div>
+
+        <div class="row g-4">
+
+            <!-- Match 1 -->
+            
+            <div class="col-lg-4">
+            
+                <div class="result-card">
+            
+                    <div class="match-status finished">
+            
+                        FULL TIME
+            
+                    </div>
+            
+                    <div class="teams">
+            
+                        <div>
+            
+                            <h5>Aerospace Engineering</h5>
+            
+                        </div>
+            
+                        <div class="score">
+            
+                            2 - 1
+            
+                        </div>
+            
+                        <div>
+            
+                            <h5>Mechanical Engineering</h5>
+            
+                        </div>
+            
+                    </div>
+            
+                    <hr>
+            
+                    <p>
+            
+                        ⭐ Man of the Match
+            
+                    </p>
+            
+                    <strong>
+            
+                        Ibrahim Musa
+            
+                    </strong>
+            
+                    <a href="{{ url_for('match_center') }}" class="fixture-btn mt-4">
+            
+                        Match Report →
+            
+                    </a>
+            
+                </div>
+            
+            </div>
+            
+            <!-- Match 2 -->
+            
+            <div class="col-lg-4">
+            
+                <div class="result-card">
+            
+                    <div class="match-status finished">
+            
+                        FULL TIME
+            
+                    </div>
+            
+                    <div class="teams">
+            
+                        <div>
+            
+                            <h5>Computer Science</h5>
+            
+                        </div>
+            
+                        <div class="score">
+            
+                            0 - 0
+            
+                        </div>
+            
+                        <div>
+            
+                            <h5>Civil Engineering</h5>
+            
+                        </div>
+            
+                    </div>
+            
+                    <hr>
+            
+                    <p>
+            
+                        ⭐ Man of the Match
+            
+                    </p>
+            
+                    <strong>
+            
+                        David James
+            
+                    </strong>
+            
+                    <a href="{{ url_for('match_center') }}" class="fixture-btn mt-4">
+            
+                        Match Report →
+            
+                    </a>
+            
+                </div>
+            
+            </div>
+            
+            <!-- Match 3 -->
+            
+            <div class="col-lg-4">
+            
+                <div class="result-card">
+            
+                    <div class="match-status finished">
+            
+                        FULL TIME
+            
+                    </div>
+            
+                    <div class="teams">
+            
+                        <div>
+            
+                            <h5>Physics</h5>
+            
+                        </div>
+            
+                        <div class="score">
+            
+                            3 - 2
+            
+                        </div>
+            
+                        <div>
+            
+                            <h5>Statistics</h5>
+            
+                        </div>
+            
+                    </div>
+            
+                    <hr>
+            
+                    <p>
+            
+                        ⭐ Man of the Match
+            
+                    </p>
+            
+                    <strong>
+            
+                        Samuel Peter
+            
+                    </strong>
+            
+                    <a href="{{ url_for('match_center') }}" class="fixture-btn mt-4">
+            
+                        Match Report →
+            
+                    </a>
+            
+                </div>
+            
+            </div>
+
+</section>
+
+<section class="standings-section"
+         data-aos="fade-up">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <span>Standings</span>
+
+            <h2>Group Standings Preview</h2>
+
+            <p>
+
+                Current leaders across all tournament groups.
+
+            </p>
+
+        </div>
+
+        <div class="row g-4">
+
+            <!-- Group A -->
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="group-card">
+
+                    <div class="group-title">
+
+                        Group A
+
+                    </div>
+
+                    <table>
+
+                        <tr>
+
+                            <td>1.</td>
+
+                            <td>Aerospace</td>
+
+                            <td><strong>9</strong></td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>2.</td>
+
+                            <td>Mechanical</td>
+
+                            <td><strong>6</strong></td>
+
+                        </tr>
+
+                    </table>
+
+                    <a href="{{ url_for('standings') }}">View Table →</a>
+
+                </div>
+
+            </div>
+
+            <!-- Group B -->
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="group-card">
+
+                    <div class="group-title">
+
+                        Group B
+
+                    </div>
+
+                    <table>
+
+                        <tr>
+
+                            <td>1.</td>
+
+                            <td>Computer</td>
+
+                            <td><strong>7</strong></td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>2.</td>
+
+                            <td>Civil</td>
+
+                            <td><strong>5</strong></td>
+
+                        </tr>
+
+                    </table>
+
+                    <a href="{{ url_for('standings') }}">View Table →</a>
+
+                </div>
+
+            </div>
+
+            <!-- Group C -->
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="group-card">
+
+                    <div class="group-title">
+
+                        Group C
+
+                    </div>
+
+                    <table>
+
+                        <tr>
+
+                            <td>1.</td>
+
+                            <td>Physics</td>
+
+                            <td><strong>8</strong></td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>2.</td>
+
+                            <td>Statistics</td>
+
+                            <td><strong>4</strong></td>
+
+                        </tr>
+
+                    </table>
+
+                    <a href="{{ url_for('standings') }}">View Table →</a>
+
+                </div>
+
+            </div>
+
+            <!-- Group D -->
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="group-card">
+
+                    <div class="group-title">
+
+                        Group D
+
+                    </div>
+
+                    <table>
+
+                        <tr>
+
+                            <td>1.</td>
+
+                            <td>Cyber Security</td>
+
+                            <td><strong>6</strong></td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>2.</td>
+
+                            <td>Mechatronics</td>
+
+                            <td><strong>4</strong></td>
+
+                        </tr>
+
+                    </table>
+
+                    <a href="{{ url_for('standings') }}">View Table →</a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section>
+
+    
+<div class="row g-4">
+
+    <!-- Top Goal Scorers -->
+
+    <div class="col-lg-6">
+
+        <div class="stats-panel">
+
+            <h3>🏆 Top Goal Scorers</h3>
+
+            <div class="leaderboard-item">
+                <span>🥇 Ibrahim Musa</span>
+                <strong>7 Goals</strong>
+            </div>
+
+            <div class="leaderboard-item">
+                <span>🥈 Samuel Peter</span>
+                <strong>5 Goals</strong>
+            </div>
+
+            <div class="leaderboard-item">
+                <span>🥉 Victor James</span>
+                <strong>4 Goals</strong>
+            </div>
+
+            <div class="leaderboard-item">
+                <span>4️⃣ Ahmed Ali</span>
+                <strong>3 Goals</strong>
+            </div>
+
+            <div class="leaderboard-item">
+                <span>5️⃣ David James</span>
+                <strong>2 Goals</strong>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Top Assist Providers -->
+
+    <div class="col-lg-6">
+
+        <div class="stats-panel">
+
+            <h3>🎯 Top Assist Providers</h3>
+
+            <div class="leaderboard-item">
+                <span>🥇 David James</span>
+                <strong>7 Assists</strong>
+            </div>
+
+            <div class="leaderboard-item">
+                <span>🥈 Ahmed Ali</span>
+                <strong>5 Assists</strong>
+            </div>
+
+            <div class="leaderboard-item">
+                <span>🥉 Joshua Peter</span>
+                <strong>4 Assists</strong>
+            </div>
+
+            <div class="leaderboard-item">
+                <span>4️⃣ Ibrahim Musa</span>
+                <strong>3 Assists</strong>
+            </div>
+
+            <div class="leaderboard-item">
+                <span>5️⃣ Victor James</span>
+                <strong>2 Assists</strong>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<section class="spotlight-section"
+         data-aos="fade-up">
+
+    <div class="container">
+
+        <div class="spotlight-card">
+
+            <div class="row align-items-center">
+
+                <div class="col-lg-5">
+
+                    <div class="spotlight-badge">
+
+                        Department Spotlight
+
+                    </div>
+
+                    <h2>Aerospace Engineering</h2>
+
+                    <p>
+
+                        Current defending champions of the AFIT Final Year Football Tournament.
+
+                    </p>
+
+                    <a href="#" class="btn btn-primary mt-3">
+
+                        View Team →
+
+                    </a>
+
+                </div>
+
+                <div class="col-lg-7">
+
+                    <div class="row text-center">
+
+                        <div class="col-4">
+
+                            <h3>2</h3>
+
+                            <p>Titles</p>
+
+                        </div>
+
+                        <div class="col-4">
+
+                            <h3>31</h3>
+
+                            <p>Goals</p>
+
+                        </div>
+
+                        <div class="col-4">
+
+                            <h3>8</h3>
+
+                            <p>Clean Sheets</p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section class="countdown-section">
+
+    <div class="container">
+
+        <div class="countdown-card">
+
+            <span class="countdown-badge">
+
+                Tournament Countdown
+
+            </span>
+
+            <h2>
+
+                AFIT Football Tournament Begins In
+
+            </h2>
+
+            <div class="countdown-timer">
+
+                <div class="time-box">
+
+                    <span id="days">28</span>
+
+                    <small>Days</small>
+
+                </div>
+
+                <div class="time-box">
+
+                    <span id="hours">14</span>
+
+                    <small>Hours</small>
+
+                </div>
+
+                <div class="time-box">
+
+                    <span id="minutes">08</span>
+
+                    <small>Minutes</small>
+
+                </div>
+
+                <div class="time-box">
+
+                    <span id="seconds">45</span>
+
+                    <small>Seconds</small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section class="gallery-section"
+         data-aos="zoom-in">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <span>Gallery</span>
+
+            <h2>Tournament Moments</h2>
+
+            <p>
+
+                Relive the biggest moments from the AFIT Final Year Football Tournament.
+
+            </p>
+
+        </div>
+
+        <div class="gallery-grid">
+
+            <div class="gallery-item large"></div>
+
+            <div class="gallery-item"></div>
+
+            <div class="gallery-item"></div>
+
+            <div class="gallery-item"></div>
+
+            <div class="gallery-item wide"></div>
+
+            <div class="gallery-item"></div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<footer class="footer">
+
+    <div class="container">
+
+        <div class="row gy-5">
+
+            <div class="col-lg-5">
+
+                <img src="{{ url_for('static', filename='images/afit-logo.png') }}"
+                    alt="AFIT Logo"
+                    class="footer-logo">
+
+                <h3>AFIT Football Tournament System</h3>
+
+                <p>
+
+                    The official platform for the AFIT Final Year
+                    Interdepartmental Football Tournament.
+
+                </p>
+
+            </div>
+
+            <div class="col-lg-3">
+
+                <h5>Tournament</h5>
+
+                <ul>
+
+                    <li><a href="{{ url_for('fixtures') }}">Fixtures</a></li>
+
+                    <li><a href="{{ url_for('results') }}">Results</a></li>
+
+                    <li><a href="{{ url_for('standings') }}">Standings</a></li>
+
+                    <li><a href="{{ url_for('teams') }}">Teams</a></li>
+
+                </ul>
+
+            </div>
+
+            <div class="col-lg-4">
+
+                <h5>Contact</h5>
+
+                <p>
+
+                    Air Force Institute of Technology
+
+                    Kaduna, Nigeria
+
+                </p>
+
+                <p>
+
+                    tournament@afit.edu.ng
+
+                </p>
+
+            </div>
+
+        </div>
+
+        <hr>
+
+        <div class="footer-bottom">
+
+            <p>
+
+                © 2026 AFIT Football Tournament System
+
+            </p>
+
+            <p>
+
+                Designed & Developed by Joseph Saheed
+
+            </p>
+
+        </div>
+
+    </div>
+
+</footer>
+{% endblock %}

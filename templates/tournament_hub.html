@@ -1,0 +1,196 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="hub-section">
+
+    <div class="container">
+
+        <div class="section-heading">
+        
+            <span>AFIT Football Championship</span>
+        
+            <h2>Competition Centre</h2>
+        
+            <p>
+        
+                Everything you need to follow the championship,
+                from fixtures to standings, statistics and departments.
+        
+            </p>
+        
+        </div>
+        
+        <div class="competition-status">
+        
+            <div class="status-box">
+        
+                <h5>Tournament Stage</h5>
+        
+                <h3>GROUP STAGE</h3>
+        
+            </div>
+        
+            <div class="status-box">
+        
+                <h5>Matches Played</h5>
+        
+                <h3>18 / 24</h3>
+        
+            </div>
+        
+        </div>
+
+        <div class="row g-4">
+
+        <div class="col-lg-4 col-md-6">
+        
+            <a href="{{ url_for('fixtures') }}" class="hub-card">
+        
+                <div class="hub-icon">
+        
+                    <i class="bi bi-calendar-event-fill"></i>
+        
+                </div>
+        
+                <h3>Fixtures</h3>
+        
+                <p>12 Upcoming Matches</p>
+        
+                <span>
+        
+                    View →
+        
+                </span>
+        
+            </a>
+        
+        </div>
+
+            <div class="col-lg-4 col-md-6">
+            
+                <a href="{{ url_for('results') }}" class="hub-card">
+            
+                    <div class="hub-icon">
+            
+                        <i class="bi bi-trophy-fill"></i>
+            
+                    </div>
+            
+                    <h3>Results</h3>
+            
+                    <p>18 Matches Completed</p>
+            
+                    <span>
+            
+                        View →
+            
+                    </span>
+            
+                </a>
+            
+            </div>
+            
+            <div class="col-lg-4 col-md-6">
+            
+                <a href="{{ url_for('standings') }}" class="hub-card">
+            
+                    <div class="hub-icon">
+            
+                        <i class="bi bi-bar-chart-fill"></i>
+            
+                    </div>
+            
+                    <h3>Standings</h3>
+            
+                    <p>4 Groups</p>
+            
+                    <span>
+            
+                        View →
+            
+                    </span>
+            
+                </a>
+            
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+            
+                <a href="{{ url_for('teams') }}" class="hub-card">
+            
+                    <div class="hub-icon">
+            
+                        <i class="bi bi-people-fill"></i>
+            
+                    </div>
+            
+                    <h3>Departments</h3>
+            
+                    <p>16 Competing Teams</p>
+            
+                    <span>
+            
+                        View →
+            
+                    </span>
+            
+                </a>
+            
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+            
+                <a href="#" class="hub-card">
+            
+                    <div class="hub-icon">
+            
+                        <i class="bi bi-graph-up-arrow"></i>
+            
+                    </div>
+            
+                    <h3>Statistics</h3>
+            
+                    <p>Goals • Assists • Cards</p>
+            
+                    <span>
+            
+                        View →
+            
+                    </span>
+            
+                </a>
+            
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+            
+                <a href="#" class="hub-card">
+            
+                    <div class="hub-icon">
+            
+                        <i class="bi bi-images"></i>
+            
+                    </div>
+            
+                    <h3>Gallery</h3>
+            
+                    <p>Tournament Moments</p>
+            
+                    <span>
+            
+                        Coming Soon →
+            
+                    </span>
+            
+                </a>
+            
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

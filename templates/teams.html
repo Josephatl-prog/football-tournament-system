@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="teams-page">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <span>Departments</span>
+
+            <h2>Meet The Teams</h2>
+
+            <p>
+                Explore the 16 departments competing for the
+                AFIT Football Championship.
+            </p>
+
+        </div>
+
+        <div class="teams-grid">
+
+            {% for team in departments %}
+
+            <div class="team-card">
+
+                <div class="team-logo">
+
+                    <i class="bi bi-shield-fill"></i>
+
+                </div>
+
+                <h3>{{ team.name }}</h3>
+
+                <p>Captain: {{ team.captain }}</p>
+
+                <p>Manager: {{ team.manager }}</p>
+
+                <p>Players: {{ team.players }}</p>
+
+                <a href="{{ url_for('team_profile', department_name=team.name.replace(' ', '-')) }}"
+                    class="btn btn-primary">
+
+                        View Team
+
+                </a>
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

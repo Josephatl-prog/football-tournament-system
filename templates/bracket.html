@@ -1,0 +1,368 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="bracket-page">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <span>AFIT Championship</span>
+
+            <h2>Knockout Stage</h2>
+
+            <p>
+
+                Follow every match from the Quarter Finals
+                to the Championship Final.
+
+            </p>
+
+        </div>
+
+        <div class="standings-nav">
+
+            <a href="{{ url_for('standings') }}" class="inactive-btn">
+
+                Group Standings
+
+            </a>
+
+            <a href="{{ url_for('bracket') }}" class="active-btn">
+
+                Knockout Bracket
+
+            </a>
+
+        </div>
+
+        <div class="bracket-wrapper">
+
+            <!-- QUARTER FINALS -->
+
+            <div class="round">
+
+                <h3>Quarter Finals</h3>
+
+                <div class="match-card">
+
+                    <span class="match-title">
+
+                        Quarter Final 1
+
+                    </span>
+
+                    <div class="team">
+
+                        Aerospace Engineering
+
+                    </div>
+
+                    <div class="team">
+
+                        Mechanical Engineering
+
+                    </div>
+
+                    <div class="match-info">
+
+                        📅 20 July 2026
+
+                        <br>
+
+                        🕓 4:00 PM
+
+                        <br>
+
+                        📍 AFIT Football Pitch
+
+                    </div>
+
+                    <a href="{{ url_for('match_center') }}" class="match-btn">
+
+                        View Match
+
+                    </a>
+
+                </div>
+
+                <div class="match-card">
+
+                    <span class="match-title">
+
+                        Quarter Final 2
+
+                    </span>
+
+                    <div class="team">
+
+                        Computer Science
+
+                    </div>
+
+                    <div class="team">
+
+                        Civil Engineering
+
+                    </div>
+
+                    <div class="match-info">
+
+                        📅 20 July 2026
+
+                        <br>
+
+                        🕓 6:00 PM
+
+                    </div>
+
+                    <a href="{{ url_for('match_center') }}" class="match-btn">
+
+                        View Match
+
+                    </a>
+
+                </div>
+
+                <div class="match-card">
+
+                    <span class="match-title">
+
+                        Quarter Final 3
+
+                    </span>
+
+                    <div class="team">
+
+                        Physics
+
+                    </div>
+
+                    <div class="team">
+
+                        Statistics
+
+                    </div>
+
+                    <div class="match-info">
+
+                        📅 21 July 2026
+
+                    </div>
+
+                    <a href="{{ url_for('match_center') }}" class="match-btn">
+
+                        View Match
+
+                    </a>
+
+                </div>
+
+                <div class="match-card">
+
+                    <span class="match-title">
+
+                        Quarter Final 4
+
+                    </span>
+
+                    <div class="team">
+
+                        Electrical Engineering
+
+                    </div>
+
+                    <div class="team">
+
+                        Mechatronics Engineering
+
+                    </div>
+
+                    <div class="match-info">
+
+                        📅 21 July 2026
+
+                    </div>
+
+                    <a href="{{ url_for('match_center') }}" class="match-btn">
+
+                        View Match
+
+                    </a>
+
+                </div>
+
+            </div>
+
+            <!-- SEMI FINALS -->
+
+            <div class="round semi-round">
+
+                <h3>Semi Finals</h3>
+
+                <div class="match-card">
+
+                    <span class="match-title">
+
+                        Semi Final 1
+
+                    </span>
+
+                    <div class="team winner">
+
+                        Winner QF1
+
+                    </div>
+
+                    <div class="team">
+
+                        Winner QF2
+
+                    </div>
+
+                    <a href="{{ url_for('match_center') }}" class="match-btn">
+
+                        View Match
+
+                    </a>
+
+                </div>
+
+                <div class="match-card">
+
+                    <span class="match-title">
+
+                        Semi Final 2
+
+                    </span>
+
+                    <div class="team winner">
+
+                        Winner QF3
+
+                    </div>
+
+                    <div class="team">
+
+                        Winner QF4
+
+                    </div>
+
+                    <a href="{{ url_for('match_center') }}" class="match-btn">
+
+                        View Match
+
+                    </a>
+
+                </div>
+
+            </div>
+
+            <!-- FINAL -->
+
+            <div class="round final-round">
+
+                <h3>Final</h3>
+
+                <div class="match-card">
+
+                    <span class="match-title">
+
+                        Championship Final
+
+                    </span>
+
+                    <div class="team winner">
+
+                        Winner SF1
+
+                    </div>
+
+                    <div class="team">
+
+                        Winner SF2
+
+                    </div>
+
+                    <a href="{{ url_for('match_center') }}" class="match-btn">
+
+                        View Match
+
+                    </a>
+
+                </div>
+
+            </div>
+
+            <!-- CHAMPION -->
+
+            <div class="round champion-round">
+
+                <h3>Champion</h3>
+
+                <div class="champion-card">
+
+                    <div class="champion-icon">
+
+                        🏆
+
+                    </div>
+
+                    <h2>
+
+                        TBD
+
+                    </h2>
+
+                    <p>
+
+                        AFIT Champion
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- THIRD PLACE -->
+
+        <div class="third-place">
+
+            <h3>
+
+                🥉 Third Place Match
+
+            </h3>
+
+            <div class="match-card">
+
+                <div class="team">
+
+                    Loser SF1
+
+                </div>
+
+                <div class="team">
+
+                    Loser SF2
+
+                </div>
+
+                <a href="{{ url_for('match_center') }}" class="match-btn">
+
+                    View Match
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}
