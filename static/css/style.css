@@ -29,3 +29,228 @@ h1,h2,h3,h4,h5{color:var(--dark);font-weight:800}p{color:var(--muted);line-heigh
 @media(max-width:992px){.stats-dashboard{grid-template-columns:1fr}.knockout-wrapper{gap:50px}.knockout-wrapper .round{min-width:320px}.semi-finals,.final-round,.champion-round{padding-top:0}}
 @media(max-width:768px){.hero{padding-top:120px}.hero-content{padding:60px 35px}.hero h1{font-size:3.4rem}.hero h2{font-size:1.4rem}.standings-section{padding:90px 20px}.match-card{padding:18px}.match-btn{font-size:.9rem}.match-score-card{flex-direction:column;gap:30px}.match-score-card .team{width:100%}.lineup-page{padding:50px 15px}.football-pitch{max-width:520px;height:680px}.player-slot{width:115px}.player-select{font-size:10px;padding:6px}.position-label{width:34px;height:34px;line-height:34px;font-size:10px}.gallery-grid{grid-template-columns:1fr 1fr}.spotlight-card{padding:45px 30px}.spotlight-card h2{font-size:2.3rem}.countdown-card{padding:50px 25px}}
 @media(max-width:576px){.hero-content{padding:45px 22px}.hero h1{font-size:2.7rem;letter-spacing:-1px}.hero p{font-size:1rem}.section-heading h2{font-size:2.3rem}.gallery-grid{grid-template-columns:1fr}.gallery-item.large{height:350px}.gallery-item.wide{grid-column:span 1}.lineup-page{padding:40px 10px}.lineup-team{margin-bottom:60px}.away-lineup{margin-top:50px}.football-pitch{width:100%;height:600px;border-width:3px}.player-slot{width:82px}.player-select{font-size:8px;padding:5px 3px}.position-label{width:30px;height:30px;line-height:30px;font-size:9px;margin-bottom:4px}.pitch-circle{width:105px;height:105px}.substitutes-card{padding:18px 12px}.substitute-grid{grid-template-columns:1fr}.countdown-timer{gap:12px}.time-box{width:105px;height:105px}.time-box span{font-size:2.3rem}.countdown-banner{width:90%;justify-content:center;text-align:center;font-size:.85rem}}
+/* ==========================================================
+   FINAL MOBILE WIDTH / NAVBAR FIX
+   ========================================================== */
+
+@media (max-width: 768px) {
+
+    html,
+    body {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    /* Navbar fits completely inside the phone */
+    .navbar {
+        width: calc(100% - 20px);
+        max-width: none;
+        left: 10px;
+        right: 10px;
+        transform: none;
+
+        padding: 12px 16px;
+        border-radius: 16px;
+    }
+
+    /* Prevent navbar contents from creating extra width */
+    .navbar .container {
+        width: 100%;
+        max-width: 100%;
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .navbar-brand {
+        min-width: 0;
+        max-width: 75%;
+        gap: 8px;
+    }
+
+    .brand-icon {
+        width: 48px;
+        height: 48px;
+    }
+
+    .brand-text span {
+        font-size: .9rem;
+    }
+
+    .brand-text small {
+        font-size: .58rem;
+        letter-spacing: .6px;
+    }
+
+    /* Bootstrap navbar collapse */
+    .navbar-collapse {
+        width: 100%;
+    }
+
+    .navbar-nav {
+        width: 100%;
+        margin-top: 15px;
+    }
+
+    .nav-item {
+        width: 100%;
+    }
+
+    .nav-link {
+        margin-left: 0;
+        padding: 10px 0;
+    }
+
+    /* ======================================================
+       ALL MAIN SECTIONS USE THE SAME MOBILE WIDTH
+       ====================================================== */
+
+    .hero,
+    .stats-section,
+    .fixtures-section,
+    .hub-section,
+    .match-centre-section,
+    .standings-section,
+    .top-scorers-section,
+    .spotlight-section,
+    .countdown-section,
+    .gallery-section,
+    .teams-page,
+    .team-profile-page,
+    .fixtures-page,
+    .match-center-page,
+    .player-stats-section,
+    .results-section,
+    .standings-page,
+    .statistics-page,
+    .bracket-page,
+    .lineup-page,
+    .admin-login-section,
+    .admin-page {
+
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    /* Bootstrap containers stay inside viewport */
+    .container {
+        width: 100%;
+        max-width: 100%;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    /* ======================================================
+       HERO
+       ====================================================== */
+
+    .hero {
+        padding: 120px 10px 40px;
+    }
+
+    .hero-content {
+        width: 100%;
+        max-width: 100%;
+        padding: 55px 25px;
+        border-radius: 24px;
+    }
+
+    .hero h1 {
+        font-size: 2.6rem;
+        letter-spacing: -1px;
+    }
+
+    .hero h2 {
+        font-size: 1.2rem;
+    }
+
+    .hero p {
+        font-size: .95rem;
+        line-height: 1.7;
+    }
+
+    .hero-buttons {
+        width: 100%;
+        gap: 12px;
+    }
+
+    .hero-buttons .btn {
+        width: 100%;
+    }
+
+    /* ======================================================
+       GENERAL CARDS
+       ====================================================== */
+
+    .stat-card,
+    .fixture-card,
+    .hub-card,
+    .result-card,
+    .group-card,
+    .scorer-card,
+    .spotlight-card,
+    .countdown-card,
+    .profile-card,
+    .stats-panel,
+    .stats-content,
+    .stats-sidebar,
+    .group-table,
+    .stats-table {
+
+        max-width: 100%;
+    }
+
+    /* ======================================================
+       HEADINGS
+       ====================================================== */
+
+    .section-heading {
+        width: 100%;
+        padding: 0 10px;
+    }
+
+    .section-heading h2 {
+        font-size: 2rem;
+    }
+
+    /* ======================================================
+       TABLES
+       ====================================================== */
+
+    .stats-table,
+    .group-table {
+        overflow-x: auto;
+    }
+
+    /* ======================================================
+       BRACKET
+       ====================================================== */
+
+    .knockout-wrapper {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: auto;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+    /* ======================================================
+       COUNTDOWN
+       ====================================================== */
+
+    .countdown-banner {
+        width: calc(100% - 20px);
+        max-width: calc(100% - 20px);
+        left: 10px;
+        right: 10px;
+        transform: none;
+
+        justify-content: center;
+        text-align: center;
+
+        padding: 10px 15px;
+        font-size: .8rem;
+    }
+
+}
